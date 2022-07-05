@@ -4,37 +4,78 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum PlayerState
+    {
+        Die,
+        Moving,
+        Idle,
+    }
+
+
     [SerializeField]
     float _speed = 10f;
 
-    bool _moveToDest = false;
     Vector3 _destPos;
+
+    PlayerState _state = PlayerState.Idle;
+
     
     void Start()
     {
-        Managers.Input.KeyAction -= OnKeyboard;
-        Managers.Input.KeyAction += OnKeyboard;
+        //Managers.Input.KeyAction -= OnKeyboard;
+        //Managers.Input.KeyAction += OnKeyboard;
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
     }
     void Update()
     {
-        if (_moveToDest)
+        switch (_state)
         {
-            Vector3 dir = _destPos - transform.position;
-            if (dir.magnitude < 0.0001f)
-            {
-                _moveToDest = false;
-            }
-            else
-            {
-                float moveDist = Mathf.Clamp(_speed * Time.deltaTime, 0f, dir.magnitude);
-                transform.position += dir.normalized * moveDist;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
-            }
+            case PlayerState.Die:
+                UpdateDie();
+                break;
+            case PlayerState.Moving:
+                UpdateMoving();
+                break;
+            case PlayerState.Idle:
+                UpdateIdle();
+                break;
+            default:
+                break;
         }
     }
 
+    void UpdateDie()
+    {
+
+    }
+    void UpdateMoving()
+    {
+        Vector3 dir = _destPos - transform.position;
+        if (dir.magnitude < 0.0001f)
+        {
+            _state = PlayerState.Idle;
+        }
+        else
+        {
+            float moveDist = Mathf.Clamp(_speed * Time.deltaTime, 0f, dir.magnitude);
+            transform.position += dir.normalized * moveDist;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
+        }
+
+        //애니메이션
+        Animator anim = GetComponent<Animator>();
+        //현재 게임 상태에 대한 정보를 넘겨준다.
+        anim.SetFloat("speed", _speed);
+    }
+    void UpdateIdle()
+    {
+        //애니메이션
+        Animator anim = GetComponent<Animator>();
+
+        anim.SetFloat("speed", 0f);
+    }
+    /*
     void OnKeyboard()
     {
         if (Input.GetKey(KeyCode.W))
@@ -60,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         _moveToDest = false;
     }
-
+    */
     void OnMouseClicked(Define.MouseEvent evt)
     {
         if (evt != Define.MouseEvent.Click)
@@ -74,7 +115,7 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log($"Raycast Camera @ {hit.collider.gameObject.name}");
             _destPos = hit.point;
-            _moveToDest = true;
+            _state = PlayerState.Moving;
         }
 
     }
