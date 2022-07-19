@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8881938649760789171}
   - component: {fileID: 8881938649760789132}
   - component: {fileID: 2109473736058531561}
+  - component: {fileID: 1203632772813165239}
   m_Layer: 8
   m_Name: Monster
   m_TagString: Untagged
@@ -116,3 +117,18 @@ MonoBehaviour:
   _attack: 0
   _defense: 0
   _moveSpeed: 0
+--- !u!114 &1203632772813165239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8881938649760789133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecbade947e5a91f478b3798943284ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destPos: {x: 0, y: 0, z: 0}
+  _state: 2
+  _lockTarget: {fileID: 0}
