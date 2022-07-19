@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     GameObject _player = null;
 
-
+    public void SetPlayer(GameObject player) { _player = player; }
     
     void Start()
     {
@@ -24,6 +24,11 @@ public class CameraController : MonoBehaviour
     {
         if (_mode == Define.CameraMode.QuarterView)
         {
+            if (_player.IsValid() == false)
+            {
+                return;
+            }
+                
             RaycastHit hit;
             if (Physics.Raycast(_player.transform.position, _delta, out hit, _delta.magnitude, _mask))
             {
