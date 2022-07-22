@@ -19,5 +19,20 @@ public abstract class BaseScene : MonoBehaviour
             Managers.Resource.Instantiate("UI/EventSystem").name = "@EventSystem";
     }
 
+    public IEnumerator Co_InitAsync()
+    {
+
+        yield return null;
+    }
+
     public abstract void Clear();
+
+    public virtual IEnumerator Co_FadeOut(Color fadeColor, float duration = 0.5f)
+    {
+        yield return null;
+    }
+    public virtual IEnumerator Co_FadeIn(Color fadeColor, float duration = 0.5f)
+    {
+        yield return null;
+    }
 }

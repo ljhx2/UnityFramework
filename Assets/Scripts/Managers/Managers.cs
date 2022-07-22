@@ -20,6 +20,7 @@ public class Managers : MonoBehaviour
     PoolManager _pool = new PoolManager();
     ResourceManager _resource = new ResourceManager();
     SceneManagerEx _scene = new SceneManagerEx();
+    SceneManagerAddressable _scene_addressable = null;
     SoundManager _sound = new SoundManager();
     UIManager _ui = new UIManager();
     public static DataManager Data { get { return Instance._data; } }
@@ -27,6 +28,7 @@ public class Managers : MonoBehaviour
     public static PoolManager Pool { get { return Instance._pool; } }
     public static ResourceManager Resource {  get { return Instance._resource; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
+    public static SceneManagerAddressable Scene_Addressable { get { return Instance._scene_addressable; } }
     public static SoundManager Sound { get { return Instance._sound; } }
     public static UIManager UI { get { return Instance._ui; } }
     #endregion
@@ -57,6 +59,10 @@ public class Managers : MonoBehaviour
             s_instance._data.Init();
             s_instance._pool.Init();
             s_instance._sound.Init();
+
+            GameObject sceneManagerGO = new GameObject("@SceneManagerAddressable");
+            sceneManagerGO.transform.parent = go.transform;
+            s_instance._scene_addressable = sceneManagerGO.GetOrAddComponent<SceneManagerAddressable>();
         }
     }
 
@@ -64,9 +70,10 @@ public class Managers : MonoBehaviour
     {
         Input.Clear();
         Scene.Clear();
+        Scene_Addressable.Clear();
         Sound.Clear();
         UI.Clear();
 
-        Pool.Clear(); //´Ù¸¥ ¸Å´ÏÀú¿¡¼­ Ç®¸µµÈ ¿ÀºêÁ§Æ®¸¦ »ç¿ëÇÒ ¼öµµ ÀÖÀ¸¹Ç·Î PoolManager´Â Ç×»ó ¸¶Áö¸·¿¡ ClearÇØÁØ´Ù.
+        Pool.Clear(); //ë‹¤ë¥¸ ë§¤ë‹ˆì €ì—ì„œ í’€ë§ëœ ì˜¤ë¸Œì íŠ¸ë¥¼ ì‚¬ìš©í•  ìˆ˜ë„ ìˆìœ¼ë¯€ë¡œ PoolManagerëŠ” í•­ìƒ ë§ˆì§€ë§‰ì— Clearí•´ì¤€ë‹¤.
     }
 }
