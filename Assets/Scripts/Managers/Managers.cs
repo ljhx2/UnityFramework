@@ -19,16 +19,16 @@ public class Managers : MonoBehaviour
     InputManager _input = new InputManager();
     PoolManager _pool = new PoolManager();
     ResourceManager _resource = new ResourceManager();
-    SceneManagerEx _scene = new SceneManagerEx();
-    SceneManagerAddressable _scene_addressable = null;
+    //SceneManagerEx _scene = new SceneManagerEx();
+    SceneManagerAddressable _scene = null;
     SoundManager _sound = new SoundManager();
     UIManager _ui = new UIManager();
     public static DataManager Data { get { return Instance._data; } }
     public static InputManager Input { get { return Instance._input; } }
     public static PoolManager Pool { get { return Instance._pool; } }
     public static ResourceManager Resource {  get { return Instance._resource; } }
-    public static SceneManagerEx Scene { get { return Instance._scene; } }
-    public static SceneManagerAddressable Scene_Addressable { get { return Instance._scene_addressable; } }
+    //public static SceneManagerEx Scene { get { return Instance._scene; } }
+    public static SceneManagerAddressable Scene { get { return Instance._scene; } }
     public static SoundManager Sound { get { return Instance._sound; } }
     public static UIManager UI { get { return Instance._ui; } }
     #endregion
@@ -62,7 +62,7 @@ public class Managers : MonoBehaviour
 
             GameObject sceneManagerGO = new GameObject("@SceneManagerAddressable");
             sceneManagerGO.transform.parent = go.transform;
-            s_instance._scene_addressable = sceneManagerGO.GetOrAddComponent<SceneManagerAddressable>();
+            s_instance._scene = sceneManagerGO.GetOrAddComponent<SceneManagerAddressable>();
         }
     }
 
@@ -70,7 +70,6 @@ public class Managers : MonoBehaviour
     {
         Input.Clear();
         Scene.Clear();
-        Scene_Addressable.Clear();
         Sound.Clear();
         UI.Clear();
 

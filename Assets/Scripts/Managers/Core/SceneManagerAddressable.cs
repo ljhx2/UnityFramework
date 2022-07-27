@@ -14,9 +14,9 @@ public class SceneManagerAddressable : MonoBehaviour
 
     private Dictionary<string, AsyncOperationHandle<SceneInstance>> _loadedScene = new System.Collections.Generic.Dictionary<string, AsyncOperationHandle<SceneInstance>>();
 
-    //private Define.Scene PrevSceneType { get; set; } = Define.Scene.Unknown;
-    //private Define.Scene NextSceneType { get; set; } = Define.Scene.Unknown;
-    public BaseScene CurrentScene { get; private set; } = null;
+    private Define.Scene PrevSceneType { get; set; } = Define.Scene.Unknown;
+    public Define.Scene NextSceneType { get; set; } = Define.Scene.Unknown;
+    public BaseScene CurrentScene { get; set; } = null;
     public Color FadeColor { get; set; } = Color.black;
 
     public void Clear()
@@ -26,7 +26,7 @@ public class SceneManagerAddressable : MonoBehaviour
 
     public void SceneLoad(Define.Scene nextSceneType, bool useLoadingScene = false)
     {
-        if (CurrentScene.SceneType == nextSceneType)
+        if (NextSceneType == nextSceneType)
             return;
 
         
@@ -42,7 +42,7 @@ public class SceneManagerAddressable : MonoBehaviour
 
     IEnumerator SceneLoadWithLoadingProcess(Define.Scene nextSceneType)
     {
-        yield return StartCoroutine(Co_SceneLoadProcess(Define.Scene.LoadingScene));
+        yield return StartCoroutine(Co_SceneLoadProcess(Define.Scene.Loading));
         yield return StartCoroutine(Co_SceneLoadProcess(nextSceneType));
     }
 
@@ -51,15 +51,16 @@ public class SceneManagerAddressable : MonoBehaviour
         //A 씬 : 언로드 할 씬 (현재 씬)
         //B 씬 : 로드 할 씬
         
-        //A씬 페이드 아웃
+        
         Scene a_Scene = SceneManager.GetActiveScene();
-        BaseScene a_BaseScene = CurrentScene;
+        BaseScene a_BaseScene = GameObject.FindObjectOfType<BaseScene>();
+
+        //A씬 페이드 아웃
         Debug.Log("A씬 페이드 아웃");
         yield return StartCoroutine(a_BaseScene.Co_FadeOut(FadeColor));
 
         //다음 씬 로드
         Debug.Log("B씬 로드");
-
         string b_SceneKey = System.Enum.GetName(typeof(Define.Scene), nextSceneType); //씬이름 = Key
         bool isLoaded = false;
         bool isFailed = false;

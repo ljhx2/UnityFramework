@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class LoginScene : BaseScene
 {
-    protected override void Init()
+
+    public override IEnumerator Co_InitAsync()
     {
-        base.Init();
+        yield return base.Co_InitAsync();
 
         SceneType = Define.Scene.Login;
     }
@@ -16,7 +17,7 @@ public class LoginScene : BaseScene
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Managers.Scene.LoadScene(Define.Scene.Game);
+            //Managers.Scene.LoadScene(Define.Scene.Game);
         }
     }
 

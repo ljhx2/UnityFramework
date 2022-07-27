@@ -19,4 +19,60 @@ public static class Extension
     {
         return go != null && go.activeSelf;
     }
+
+    public static T GetComponentByName<T>(this GameObject self, string name = null, bool includeInactive = false) where T : Component
+    {
+        var children = self.GetComponentsInChildren(typeof(T), includeInactive);
+        foreach (T c in children)
+        {
+            if (name == null || (c.name.ToLower() == name.ToLower()))
+            {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public static T GetComponentByName<T>(this Component self, string name = null, bool includeInactive = false) where T : Component
+    {
+        var children = self.GetComponentsInChildren(typeof(T), includeInactive);
+        foreach (T c in children)
+        {
+            if (name == null || (c.name.ToLower() == name.ToLower()))
+            {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public static List<T> GetComponentsByName<T>(this GameObject self, string name = null, bool includeInactive = false) where T : Component
+    {
+        var listComponents = new List<T>();
+        var children = self.GetComponentsInChildren(typeof(T), includeInactive);
+        foreach (T c in children)
+        {
+            if (name == null || (c.name.ToLower() == name.ToLower()))
+            {
+                listComponents.Add(c);
+            }
+        }
+
+        return listComponents;
+    }
+
+    public static List<T> GetComponentsByName<T>(this Component self, string name = null, bool includeInactive = false) where T : Component
+    {
+        var listComponents = new List<T>();
+        var children = self.GetComponentsInChildren(typeof(T), includeInactive);
+        foreach (T c in children)
+        {
+            if (name == null || (c.name.ToLower() == name.ToLower()))
+            {
+                listComponents.Add(c);
+            }
+        }
+
+        return listComponents;
+    }
 }

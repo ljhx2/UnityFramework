@@ -6,6 +6,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 
+/*
 public class SceneManagerEx
 {
     public BaseScene CurrentScene { get { return GameObject.FindObjectOfType<BaseScene>(); } }
@@ -27,3 +28,4 @@ public class SceneManagerEx
         CurrentScene.Clear();
     }
 }
+*/

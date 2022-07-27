@@ -1,26 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LoadingScene : BaseScene
 {
-    public override void Clear()
-    {
-        
-    }
+    [SerializeField] TextMeshProUGUI _loadingMessage;
 
-    // Start is called before the first frame update
+    public override IEnumerator Co_InitAsync()
+    {
+        yield return base.Co_InitAsync();
+        SceneType = Define.Scene.Loading;
+    }
     void Start()
     {
-        Managers.Scene_Addressable.SceneLoadProgress += LoadingProgress;
+        Managers.Scene.SceneLoadProgress += LoadingProgress;
+
     }
     private void OnDestroy()
     {
-        Managers.Scene_Addressable.SceneLoadProgress -= LoadingProgress;
+        Managers.Scene.SceneLoadProgress -= LoadingProgress;
     }
 
     private void LoadingProgress(float obj)
     {
-        Debug.Log($"Loading : {obj * 100f}");
+        _loadingMessage.text = $"Loading {obj * 100f}%";
+        Debug.Log($"Loading {obj * 100f}%");
     }
 }
