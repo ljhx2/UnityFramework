@@ -29,6 +29,54 @@ MonoBehaviour:
     m_Address: Login
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 98e22d59124cc054184a98851ced5d4f
+    m_Address: Monster
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: df49a7e879569e9409a07f5199a61e1f
+    m_Address: UnityChan
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dc3ed53ebee415c4b886cfc74371ac57
+    m_Address: UI/EventSystem
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0b9d97a4aba20f14db9db7d51f12cc99
+    m_Address: Textures/Cursor/Attack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d0dddded1166db24b994116653b3b2c5
+    m_Address: Textures/Cursor/Hand
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 69766364f7d4c34409607a2c6bc41dbb
+    m_Address: Textures/Cursor/Loot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 520f1ec00c5dc894c8977100ff406382
+    m_Address: Data/StatData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e4d69e1a0430962468ad3fc6e4b390dd
+    m_Address: Sounds/UnityChan/univ0001
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 947ede113d7d5b24d977922ab8330523
+    m_Address: Sounds/UnityChan/univ0002
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cb7413678c54c3e429f4efd7c6710d5a
+    m_Address: Prefabs/UI/Popup/UI_Button
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e2c11191ba5ceaa42b0fa847b306f02e
+    m_Address: Prefabs/UI/Scene/UI_Inven
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6ad7802a7fd1d4d4693ac524b94c854b
+    m_Address: Prefabs/UI/SubItem/UI_Inven_Item
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6a5dc3a7e2a3d2f47b59d01ed502c392, type: 2}
   m_SchemaSet:
