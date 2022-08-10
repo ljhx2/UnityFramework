@@ -23,7 +23,8 @@ public class Managers : MonoBehaviour
     //SceneManagerEx _scene = new SceneManagerEx();
     SceneManagerAddressable _scene = null;
     SoundManager _sound = new SoundManager();
-    UIManager _ui = new UIManager();
+    //UIManager _ui = new UIManager();
+    UIManager _ui = null;
     public static DataManager Data { get { return Instance._data; } }
     public static InputManager Input { get { return Instance._input; } }
     public static PoolManager Pool { get { return Instance._pool; } }
@@ -62,9 +63,21 @@ public class Managers : MonoBehaviour
             s_instance._pool.Init();
             s_instance._sound.Init();
 
-            GameObject sceneManagerGO = new GameObject("@SceneManagerAddressable");
-            sceneManagerGO.transform.parent = go.transform;
-            s_instance._scene = sceneManagerGO.GetOrAddComponent<SceneManagerAddressable>();
+            Transform sceneManagerTransform = s_instance.transform.Find("@SceneManagerAddressable");
+            if (sceneManagerTransform == null)
+            {
+                sceneManagerTransform = new GameObject("@SceneManagerAddressable").transform;
+            }
+            sceneManagerTransform.parent = go.transform;
+            s_instance._scene = sceneManagerTransform.gameObject.GetOrAddComponent<SceneManagerAddressable>();
+
+            Transform uiManagerTransform = s_instance.transform.Find("@UIManager");
+            if (uiManagerTransform == null)
+            {
+                uiManagerTransform = new GameObject("@UIManager").transform;
+            }
+            uiManagerTransform.parent = go.transform;
+            s_instance._ui = uiManagerTransform.gameObject.GetOrAddComponent<UIManager>();
         }
     }
 

@@ -37,7 +37,7 @@ public class ResourceManagerAddressable
         }
     }
 
-    public AsyncOperationHandle<GameObject> InstantiateAsync(string key, Transform parent = null, Action<GameObject> complete = null)
+    public void InstantiateAsync(string key, Transform parent = null, Action<GameObject> complete = null)
     {
         if (_loadedResourceHandle.ContainsKey(key))
         {
@@ -53,7 +53,6 @@ public class ResourceManagerAddressable
             }
             
             complete?.Invoke(instance);
-            return handle;
         }
         else
         {
@@ -70,7 +69,6 @@ public class ResourceManagerAddressable
 
                 complete?.Invoke(instance);
             });
-            return handle;
         }
     }
 

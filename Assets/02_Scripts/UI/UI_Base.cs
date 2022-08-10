@@ -9,16 +9,25 @@ public abstract class UI_Base : MonoBehaviour
 {
     protected Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
 
+    public bool IsLoaded { get; set; }
+
     void Start()
     {
         Init();
     }
 
-    public abstract void Init();
+    public virtual void Init()
+    {
+        Canvas canvas = gameObject.GetOrAddComponent<Canvas>();
+        //canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.overrideSorting = true;
+        canvas.sortingOrder = 0;
+    }
 
     protected void Bind<T>(Type type) where T : UnityEngine.Object
     {
-        string[] names = Enum.GetNames(type); //EnumÀÇ °ªµéÀ» stringÀ¸·Î ÃßÃâ
+        string[] names = Enum.GetNames(type); //Enumì˜ ê°’ë“¤ì„ stringìœ¼ë¡œ ì¶”ì¶œ
         UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
         _objects.Add(typeof(T), objects);
 

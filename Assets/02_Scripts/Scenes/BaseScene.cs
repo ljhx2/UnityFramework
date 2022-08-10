@@ -70,16 +70,10 @@ public abstract class BaseScene : MonoBehaviour
         Object obj = GameObject.FindObjectOfType(typeof(EventSystem));
         if (obj == null)
         {
-            //방법1
-            var handle = Managers.ResourceA.InstantiateAsync("UI/EventSystem");
-            yield return handle;
-            handle.Result.name = "@EventSystem";
-
-            //방법2
-            //Managers.ResourceA.InstantiateAsync("EventSystem", null, (go) =>
-            //{
-            //    go.name = "@EventSystem";
-            //});
+            Managers.ResourceA.InstantiateAsync("UI/EventSystem", null, (go) =>
+            {
+                go.name = "@EventSystem";
+            });
         }
 
         

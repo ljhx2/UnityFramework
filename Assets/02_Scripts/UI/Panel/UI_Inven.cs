@@ -2,13 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Inven : UI_Scene
+public class UI_Inven : UI_Panel//UI_Popup
 {
     enum GameObjects
     {
         GridPanel
     }
-    
+
+    private void Start()
+    {
+        Init();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log($"{gameObject.GetHashCode()} : sdfdsf");
+        }
+    }
+
     public override void Init()
     {
         base.Init();
@@ -29,9 +41,13 @@ public class UI_Inven : UI_Scene
                 Managers.UI.MakeSubItemAsync<UI_Inven_Item>(gridPanel.transform, null, (item) =>
                 {
                     item.SetInfo($"집행검{index}번");
+                    if (index == 7)
+                    {
+                        IsLoaded = true;
+                    }
                 });
             }
         });
-        
+        gameObject.SetActive(false);
     }
 }

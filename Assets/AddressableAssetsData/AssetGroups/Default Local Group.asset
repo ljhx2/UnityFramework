@@ -37,10 +37,6 @@ MonoBehaviour:
     m_Address: UnityChan
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: dc3ed53ebee415c4b886cfc74371ac57
-    m_Address: UI/EventSystem
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 0b9d97a4aba20f14db9db7d51f12cc99
     m_Address: Textures/Cursor/Attack
     m_ReadOnly: 0
@@ -70,11 +66,15 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: e2c11191ba5ceaa42b0fa847b306f02e
-    m_Address: Prefabs/UI/Scene/UI_Inven
+    m_Address: Prefabs/UI/Panel/UI_Inven
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 6ad7802a7fd1d4d4693ac524b94c854b
     m_Address: Prefabs/UI/SubItem/UI_Inven_Item
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: dc3ed53ebee415c4b886cfc74371ac57
+    m_Address: UI/EventSystem
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
