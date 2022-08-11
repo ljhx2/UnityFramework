@@ -37,39 +37,21 @@ public class ResourceManagerAddressable
         }
     }
 
-    public void InstantiateAsync(string key, Transform parent = null, Action<GameObject> complete = null)
+    public AsyncOperationHandle<GameObject> InstantiateAsync(string key, Transform parent = null, Action<GameObject> completed = null)
     {
-        if (_loadedResourceHandle.ContainsKey(key))
+        AsyncOperationHandle<GameObject> handle = Addressables.InstantiateAsync(key, parent);
+        handle.Completed += (result) =>
         {
-            AsyncOperationHandle<GameObject> handle = _loadedResourceHandle[key].Convert<GameObject>();
-            GameObject loadObject = handle.Result;
-            GameObject instance = null;
-            if (loadObject.GetComponent<Poolable>() != null)
-                instance = Managers.Pool.Pop(loadObject, parent).gameObject;
+            if (result.Status == AsyncOperationStatus.Succeeded)
+            {
+                completed?.Invoke(result.Result);
+            }
             else
             {
-                instance = UnityEngine.Object.Instantiate(loadObject, parent);
-                instance.name = loadObject.name;
+                Debug.LogError($"InstantiateAsync key:{key} result:{result.Status.ToString()}");
             }
-            
-            complete?.Invoke(instance);
-        }
-        else
-        {
-            AsyncOperationHandle<GameObject> handle = LoadAsync<GameObject>(key, (loadObject) =>
-            {
-                GameObject instance = null;
-                if (loadObject.GetComponent<Poolable>() != null)
-                    instance = Managers.Pool.Pop(loadObject, parent).gameObject;
-                else
-                {
-                    instance = UnityEngine.Object.Instantiate(loadObject, parent);
-                    instance.name = loadObject.name;
-                }
-
-                complete?.Invoke(instance);
-            });
-        }
+        };
+        return handle;
     }
 
     public void Destroy(GameObject go)
@@ -84,7 +66,7 @@ public class ResourceManagerAddressable
             return;
         }
 
-        UnityEngine.Object.Destroy(go);
+        Addressables.ReleaseInstance(go);
     }
 
     public void Clear()

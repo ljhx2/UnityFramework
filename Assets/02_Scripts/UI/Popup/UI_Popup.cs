@@ -8,6 +8,11 @@ public abstract class UI_Popup : UI_Base
     protected List<Transform> _childTransformList = new List<Transform>();
     protected List<Vector3> _childOriginScaleList = new List<Vector3>();
 
+    protected virtual void OnEnable()
+    {
+        
+    }
+
     public override void Init()
     {
         base.Init();
@@ -18,10 +23,9 @@ public abstract class UI_Popup : UI_Base
             Transform child = canvasTransform.GetChild(i);
             _childTransformList.Add(child);
             _childOriginScaleList.Add(child.localScale);
-            //child.localScale = Vector3.zero;
+            child.localScale = Vector3.zero;
         }
     }
-
 
     public virtual void Show(float duration = 0f, Action<UI_Popup> completed = null)
     {

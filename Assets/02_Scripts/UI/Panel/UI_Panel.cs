@@ -5,14 +5,20 @@ using UnityEngine;
 
 public abstract class UI_Panel : UI_Base
 {
-    protected CanvasGroup _canvasGroup;
+    protected CanvasGroup _canvasGroup = null;
+
+    protected virtual void OnEnable()
+    {
+        if (_canvasGroup == null)
+        {
+            _canvasGroup = gameObject.GetOrAddComponent<CanvasGroup>();
+        }
+        _canvasGroup.alpha = 0f;
+    }
 
     public override void Init()
     {
         base.Init();
-
-        _canvasGroup = gameObject.GetOrAddComponent<CanvasGroup>();
-        _canvasGroup.alpha = 0f;
     }
 
     public virtual void Show(float duration = 0f, Action<UI_Panel> completed = null)

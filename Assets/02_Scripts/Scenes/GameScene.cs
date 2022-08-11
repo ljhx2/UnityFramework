@@ -11,8 +11,8 @@ public class GameScene : BaseScene
 
         SceneType = Define.Scene.Game;
 
-        Managers.UI.ShowPanelUIAsync<UI_Inven>(fadeDuration: 0.2f, completed:(panel) => { _inven = (UI_Inven)panel; });
-        //Managers.UI.ShowPopupUIAsync<UI_Inven>(scaleDuration: 0.2f, completed: (panel) => { _inven = (UI_Inven)panel; });
+        //Managers.UI.ShowPanelUIAsync<UI_Inven>(fadeDuration: 0.2f, completed:(panel) => { _inven = (UI_Inven)panel; });
+        Managers.UI.ShowPopupUIAsync<UI_Inven>(scaleDuration: 0.2f, completed: (panel) => { _inven = panel; });
 
         Dictionary<int, Data.Stat> dick = Managers.Data.StatDict;
 

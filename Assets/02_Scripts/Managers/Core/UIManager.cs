@@ -182,7 +182,7 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    public void ShowPanelUIAsync<T>(string key = null, float fadeDuration = 0f, Action<UI_Panel> completed = null) where T : UI_Panel
+    public void ShowPanelUIAsync<T>(string key = null, float fadeDuration = 0f, Action<T> completed = null) where T : UI_Panel
     {
         if (string.IsNullOrEmpty(key))
             key = typeof(T).Name;
@@ -192,23 +192,20 @@ public class UIManager : MonoBehaviour
         {
             UI_Panel panel = _panelDict[key];
             //panel.transform.SetParent(PanelRoot);
-            completed?.Invoke(panel);
+            completed?.Invoke(panel as T);
             _panelDict[key].Show(fadeDuration, null);
         }
         else
         {
-            Managers.ResourceA.InstantiateAsync(key, PanelRoot, (go) =>
-            {
-                StartCoroutine(Co_ShowPanel<T>(go, key, fadeDuration, completed));
-                //T panelUI = go.GetOrAddComponent<T>();
-                //_panelDict.Add(key, panelUI);
-                //completed?.Invoke(panelUI);
-                //panelUI.Show(fadeDuration, null);
-            });
+            StartCoroutine(Co_ShowPanel<T>(key, fadeDuration, completed));
         }
     }
-    IEnumerator Co_ShowPanel<T>(GameObject instance, string key, float fadeDuration = 0f, Action<UI_Panel> completed = null) where T : UI_Panel
+    IEnumerator Co_ShowPanel<T>(string key, float fadeDuration = 0f, Action<T> completed = null) where T : UI_Panel
     {
+        var handle = Managers.ResourceA.InstantiateAsync(key, PanelRoot);
+        yield return handle;
+
+        GameObject instance = handle.Result;
         T panelUI = instance.GetOrAddComponent<T>();
         _panelDict.Add(key, panelUI);
         
@@ -233,7 +230,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ShowPopupUIAsync<T>(string key = null, float scaleDuration = 0f, Action<UI_Popup> completed = null) where T : UI_Popup
+    public void ShowPopupUIAsync<T>(string key = null, float scaleDuration = 0f, Action<T> completed = null) where T : UI_Popup
     {
         if (string.IsNullOrEmpty(key))
             key = typeof(T).Name;
@@ -244,25 +241,20 @@ public class UIManager : MonoBehaviour
             UI_Popup popup = _popupDict[key];
             //popup.transform.SetParent(PopupRoot);
             popup.transform.SetAsLastSibling();
-            completed?.Invoke(popup);
+            completed?.Invoke(popup as T);
             popup.Show(scaleDuration, null);
         }
         else
         {
-            
-            Managers.ResourceA.InstantiateAsync(key, PopupRoot, (go) =>
-            {
-                StartCoroutine(Co_ShowPopup<T>(go, key, scaleDuration, completed));
-                //T popup = go.GetOrAddComponent<T>();
-                //_popupDict.Add(key, popup);
-                //go.transform.SetAsLastSibling();
-                //completed?.Invoke(popup);
-                //popup.Show(scaleDuration, null);
-            });
+            StartCoroutine(Co_ShowPopup<T>(key, scaleDuration, completed));
         }
     }
-    IEnumerator Co_ShowPopup<T>(GameObject instance, string key, float scaleDuration = 0f, Action<UI_Popup> completed = null) where T : UI_Popup
+    IEnumerator Co_ShowPopup<T>(string key, float scaleDuration = 0f, Action<T> completed = null) where T : UI_Popup
     {
+        var handle = Managers.ResourceA.InstantiateAsync(key, PopupRoot);
+        yield return handle;
+
+        GameObject instance = handle.Result;
         T popup = instance.GetComponent<T>();
         _popupDict.Add(key, popup);
         instance.transform.SetAsLastSibling();
