@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI
+  m_EditorClassIdentifier: 
+  m_GroupName: UI
+  m_GUID: 6c929b5033eec134987584e21541f9dc
+  m_SerializeEntries:
+  - m_GUID: 6ad7802a7fd1d4d4693ac524b94c854b
+    m_Address: Prefabs/UI/SubItem/UI_Inven_Item
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb7413678c54c3e429f4efd7c6710d5a
+    m_Address: Prefabs/UI/Popup/UI_Button
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2c11191ba5ceaa42b0fa847b306f02e
+    m_Address: Prefabs/UI/Popup/UI_Inven
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6a5dc3a7e2a3d2f47b59d01ed502c392, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 61d8a19aae1980f438866cb16e28925a, type: 2}
+    - {fileID: 11400000, guid: 8832a628e27fc2543be8469a1090e422, type: 2}
