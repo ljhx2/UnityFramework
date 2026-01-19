@@ -125,7 +125,9 @@ public class UIManager
 public class UIManager : MonoBehaviour
 {
     private Dictionary<string, UI_Panel> _panelDict = new Dictionary<string, UI_Panel>();
-    private Dictionary<string, UI_Popup> _popupDict = new Dictionary<string, UI_Popup>();
+    //private Dictionary<string, UI_Popup> _popupDict = new Dictionary<string, UI_Popup>();
+    private Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
+
 
     public GameObject Root
     {
@@ -236,18 +238,7 @@ public class UIManager : MonoBehaviour
             key = typeof(T).Name;
 
         key = $"Prefabs/UI/Popup/{key}";
-        if (_popupDict.ContainsKey(key))
-        {
-            UI_Popup popup = _popupDict[key];
-            //popup.transform.SetParent(PopupRoot);
-            popup.transform.SetAsLastSibling();
-            completed?.Invoke(popup as T);
-            popup.Show(scaleDuration, null);
-        }
-        else
-        {
-            StartCoroutine(Co_ShowPopup<T>(key, scaleDuration, completed));
-        }
+        StartCoroutine(Co_ShowPopup<T>(key, scaleDuration, completed));
     }
     IEnumerator Co_ShowPopup<T>(string key, float scaleDuration = 0f, Action<T> completed = null) where T : UI_Popup
     {
@@ -256,8 +247,7 @@ public class UIManager : MonoBehaviour
 
         GameObject instance = handle.Result;
         T popup = instance.GetComponent<T>();
-        _popupDict.Add(key, popup);
-        instance.transform.SetAsLastSibling();
+        _popupStack.Push(popup);
 
         while (popup.IsLoaded == false)
         {
@@ -265,23 +255,43 @@ public class UIManager : MonoBehaviour
         }
         
         completed?.Invoke(popup);
-        popup.Show(scaleDuration, null);
+        popup.Show(scaleDuration);
     }
 
-    public void HidePopupUI(UI_Popup popup, float scaleDuration = 0f, Action<UI_Popup> completed = null)
+    public void ClosePopupUI(UI_Popup popup, float scaleDuration = 0f, Action completed = null)
     {
-        popup.Hide(scaleDuration, completed);
-    }
-    public void HidePopupUI(string key, float scaleDuration = 0f, Action<UI_Popup> completed = null)
-    {
-        key = $"Prefabs/UI/Popup/{key}";
-        if (_popupDict.ContainsKey(key))
+        if (_popupStack.Count == 0)
+            return;
+
+        if (_popupStack.Peek() != popup)
         {
-            HidePopupUI(_popupDict[key], scaleDuration, completed);
+            Debug.Log("Close Popup Failed!");
+            return;
         }
+
+        ClosePopupUI(scaleDuration, completed);
     }
 
-    public void DestroyAllPanelUI()
+    public void ClosePopupUI(float scaleDuration = 0f, Action completed = null)
+    {
+        if (_popupStack.Count == 0)
+            return;
+
+        UI_Popup popup = _popupStack.Pop();
+        popup.Hide(scaleDuration, (popup) => 
+        {
+            Managers.ResourceA.Destroy(popup.gameObject);
+            completed?.Invoke();
+        });
+    }
+
+    public void CloseAllPopupUI(float scaleDuration = 0f)
+    {
+        while (_popupStack.Count > 0)
+            ClosePopupUI(scaleDuration);
+    }
+
+    public void CloseAllPanelUI()
     {
         foreach (var kv in _panelDict)
         {
@@ -289,18 +299,11 @@ public class UIManager : MonoBehaviour
         }
         _panelDict.Clear();
     }
-    public void DestroyAllPopupUI()
-    {
-        foreach(var kv in _popupDict)
-        {
-            Managers.ResourceA.Destroy(kv.Value.gameObject);
-        }
-        _popupDict.Clear();
-    }
+
 
     public void Clear()
     {
-        DestroyAllPanelUI();
-        DestroyAllPopupUI();
+        CloseAllPanelUI();
+        CloseAllPopupUI();
     }
 }

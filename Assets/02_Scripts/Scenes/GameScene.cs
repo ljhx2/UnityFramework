@@ -36,6 +36,14 @@ public class GameScene : BaseScene
     bool _toggle = false;
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Managers.UI.ShowPopupUIAsync<UI_Inven>(scaleDuration: 0.2f, completed: (panel) => { _inven = panel; });
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Managers.UI.ClosePopupUI(scaleDuration: 0.2f);
+        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             _toggle = !_toggle;
