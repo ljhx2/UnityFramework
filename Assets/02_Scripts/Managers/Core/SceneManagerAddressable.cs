@@ -50,10 +50,9 @@ public class SceneManagerAddressable : MonoBehaviour
     {
         //A 씬 : 언로드 할 씬 (현재 씬)
         //B 씬 : 로드 할 씬
-        
-        
+
         Scene a_Scene = SceneManager.GetActiveScene();
-        BaseScene a_BaseScene = GameObject.FindObjectOfType<BaseScene>();
+        BaseScene a_BaseScene = CurrentScene;
 
         //A씬 페이드 아웃
         Debug.Log("A씬 페이드 아웃");
@@ -92,7 +91,6 @@ public class SceneManagerAddressable : MonoBehaviour
             yield return null;
         }
         SceneLoadProgress?.Invoke(1f);
-        //yield return new WaitUntil(() => isLoaded == true);
 
         if (isFailed)
         {
@@ -109,17 +107,8 @@ public class SceneManagerAddressable : MonoBehaviour
         // 씬 전환 중 처리 (이전씬 및 풀링 등의 정리)
         Managers.Clear();
 
-        GameObject[] goList = a_Scene.GetRootGameObjects();
-        for (int i = 0; i < goList.Length; i++)
-        {
-            Destroy(goList[i]);
-        }
-
-        yield return new WaitForEndOfFrame();
-
         //다음 씬 BaseScene 설정
         CurrentScene = b_Scene.GetRootGameObjects().Single(x => x.CompareTag("Scene")).GetComponent<BaseScene>();
-        yield return new WaitForEndOfFrame();
 
         // A 씬 언로드
         Debug.Log("A 씬 언로드");
@@ -147,10 +136,8 @@ public class SceneManagerAddressable : MonoBehaviour
         Debug.Log("B 씬 초기화");
         yield return StartCoroutine(CurrentScene.Co_InitAsync());
 
-        yield return new WaitForEndOfFrame();
         //씬 페이드 인
         Debug.Log("B 씬 페이드 인");
         yield return StartCoroutine(CurrentScene.Co_FadeIn(FadeColor));
-
     }
 }

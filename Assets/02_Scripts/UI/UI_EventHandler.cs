@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-// Âü°í : https://docs.unity3d.com/kr/2019.2/ScriptReference/EventSystems.IEventSystemHandler.html
+// ì°¸ê³  : https://docs.unity3d.com/kr/2019.2/ScriptReference/EventSystems.IEventSystemHandler.html
 public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler
 {
     public Action<PointerEventData> OnClickHandler = null;
@@ -18,10 +18,10 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler
             OnClickHandler.Invoke(eventData);
     }
     public void OnDrag(PointerEventData eventData)
-    {        
+    {
         if (OnDragHandler != null)
             OnDragHandler.Invoke(eventData);
     }
 
-    
+
 }
