@@ -15,7 +15,7 @@ public abstract class BaseScene : MonoBehaviour
     public Define.Scene SceneType { get; protected set; } = Define.Scene.Unknown;
 
 #if UNITY_EDITOR
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void FirstLoad()
     {
         Application.targetFrameRate = 60;
