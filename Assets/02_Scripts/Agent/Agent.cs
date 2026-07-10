@@ -14,9 +14,12 @@ public class Agent : MonoBehaviour
 
     private State _currentState;
 
+    private IAgentJumpInput _jumpInput;
+
     private void Awake()
     {
         _input = GetComponent<IAgentMovementInput>();
+        _jumpInput = GetComponent<IAgentJumpInput>();
         _groundDetector = GetComponent<GroundedDetector>();
         _agentAnimations = GetComponent<AgentAnimations>();
         _mover = GetComponent<BasicCharacterControllerMover>();
@@ -46,6 +49,8 @@ public class Agent : MonoBehaviour
         {
             newState = new MovementState(_mover, _groundDetector, _agentAnimations, _input);
             newState.AddTransition(new GroundedFallTransition(_groundDetector));
+            if (_jumpInput != null)
+                newState.AddTransition(new JumpTransition(_jumpInput));
         }
         else if (stateType == typeof(FallState))
         {
@@ -56,6 +61,11 @@ public class Agent : MonoBehaviour
         {
             newState = new LandState(_agentAnimations);
             newState.AddTransition(new LandMovementTransition());
+        }
+        else if (stateType == typeof(JumpState))
+        {
+            newState = new JumpState(_mover, _agentAnimations, _input);
+            newState.AddTransition(new JumpFallTransition(_mover));
         }
         else
         {

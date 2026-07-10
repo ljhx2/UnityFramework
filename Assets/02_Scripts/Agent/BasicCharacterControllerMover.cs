@@ -13,6 +13,8 @@ public class BasicCharacterControllerMover : MonoBehaviour
 
     [SerializeField] private AgentRotationStrategy _rotationStrategy;
 
+    public Vector3 CurrentVelocity { get; private set; }
+
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -31,7 +33,9 @@ public class BasicCharacterControllerMover : MonoBehaviour
 
         Vector3 targetDirection = Quaternion.Euler(0f, _targetRotation, 0f) * Vector3.forward;
 
-        _controller.Move(targetDirection.normalized * input.normalized.magnitude * (_speed * Time.deltaTime) + new Vector3(0f, input.y, 0f) * Time.deltaTime);
+        CurrentVelocity = targetDirection.normalized * input.normalized.magnitude * (_speed * Time.deltaTime) + new Vector3(0f, input.y, 0f) * Time.deltaTime;
+
+        _controller.Move(CurrentVelocity);
     }
 
     private void CharacterMovementCalculation(Vector2 horizontalInput, float targetSpeed)
