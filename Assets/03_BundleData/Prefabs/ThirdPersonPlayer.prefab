@@ -140,22 +140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tips.Partm_1m_Start.PlayerMonolithic
   MoveSpeed: 2
   SprintSpeed: 5.335
-  RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   FallTimeout: 0.15
   Gravity: -15
-  Grounded: 1
-  StairsGrounded: 1
-  GroundedOffset: 0.21
-  StairOffset: 0.07
-  GroundedRadius: 0.28
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 512
-  AnimationSpeedFloat: Speed
-  AnimationGroundedBool: Grounded
-  AnimationFallTrigger: Fall
-  _rotationStrategy: {fileID: 0}
 --- !u!114 &4426766604110079682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,7 +761,7 @@ PrefabInstance:
     - target: {fileID: 3235965575142257260, guid: 1c443c3abb862244aa6185fe28d5f5bb, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 231fdfb5a1669db4e9662d7a9f208a44, type: 2}
+      objectReference: {fileID: 9100000, guid: adcd187e19565bf419de4de2e57f72ff, type: 2}
     - target: {fileID: 3235965575142257260, guid: 1c443c3abb862244aa6185fe28d5f5bb, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
