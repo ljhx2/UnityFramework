@@ -469,6 +469,9 @@ GameObject:
   - component: {fileID: 60586114519266302}
   - component: {fileID: 2539592740454812610}
   - component: {fileID: 6476273174670996194}
+  - component: {fileID: 5878158459983366512}
+  - component: {fileID: 635801627833551801}
+  - component: {fileID: 673971251631799859}
   m_Layer: 8
   m_Name: NPC
   m_TagString: Player
@@ -580,22 +583,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AgentMonolithic
   MoveSpeed: 2
   SprintSpeed: 5.335
-  RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   FallTimeout: 0.15
   Gravity: -15
-  Grounded: 1
-  StairsGrounded: 1
-  GroundedOffset: 0.21
-  StairOffset: 0.07
-  GroundedRadius: 0.28
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 512
-  AnimationSpeedFloat: Speed
-  AnimationGroundedBool: Grounded
-  AnimationFallTrigger: Fall
-  _rotationStrategy: {fileID: 0}
 --- !u!114 &2539592740454812610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +612,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b27f37754956743b0aaf044234d915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCRotationStrategy
+--- !u!114 &5878158459983366512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829922534887430264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4d4664caea470449f03ab36d82ff72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundedDetector
+  <Grounded>k__BackingField: 0
+  <StairsGrounded>k__BackingField: 0
+  _groundedOffset: 0.14
+  _stairOffset: 0.02
+  _groundedRadius: 0.28
+  _groundLayers:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!114 &635801627833551801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829922534887430264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03df61bd9d370ae4d93ed052f9ee1996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentAnimations
+  _animationSpeedFloat: Speed
+  _animationGroundedBool: Grounded
+  _animationFallTrigger: Fall
+  _animationJumpTrigger: Jump
+  _animationLandTrigger: Land
+--- !u!114 &673971251631799859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829922534887430264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e303b02f33e4f2e48bf13b308c9baa07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BasicCharacterControllerMover
+  _rotationSmoothTime: 0.12
+  _speedChangeRate: 10
+  _rotationStrategy: {fileID: 0}
 --- !u!1 &1908433187578950293
 GameObject:
   m_ObjectHideFlags: 0

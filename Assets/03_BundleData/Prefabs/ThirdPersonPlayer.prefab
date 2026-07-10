@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 4426766604110079682}
   - component: {fileID: 8126606896537402501}
   - component: {fileID: 6802714118521675077}
+  - component: {fileID: 8687155702037580115}
+  - component: {fileID: 8130916935691015467}
+  - component: {fileID: 8763702394505584788}
   m_Layer: 6
   m_Name: ThirdPersonPlayer
   m_TagString: Untagged
@@ -193,6 +196,58 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 5783078426431019476}
   TopCameraLimit: 70
   BottomCameraLimit: -30
+--- !u!114 &8687155702037580115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30110938091981782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4d4664caea470449f03ab36d82ff72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundedDetector
+  <Grounded>k__BackingField: 0
+  <StairsGrounded>k__BackingField: 0
+  _groundedOffset: 0.21
+  _stairOffset: 0.02
+  _groundedRadius: 0.28
+  _groundLayers:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!114 &8130916935691015467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30110938091981782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03df61bd9d370ae4d93ed052f9ee1996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentAnimations
+  _animationSpeedFloat: Speed
+  _animationGroundedBool: Grounded
+  _animationFallTrigger: Fall
+  _animationJumpTrigger: Jump
+  _animationLandTrigger: Land
+--- !u!114 &8763702394505584788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30110938091981782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e303b02f33e4f2e48bf13b308c9baa07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BasicCharacterControllerMover
+  _rotationSmoothTime: 0.12
+  _speedChangeRate: 10
+  _rotationStrategy: {fileID: 0}
 --- !u!1 &5783078426431019476
 GameObject:
   m_ObjectHideFlags: 0
