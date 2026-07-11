@@ -5,22 +5,20 @@ public class FallState : State
     private BasicCharacterControllerMover _mover;
     private AgentAnimations _agentAnimations;
     private IAgentMovementInput _input;
-
-    private float _moveSpeed = 2f;
-    private float _sprintSpeed = 5.335f;
+    private AgentStats _agentStats;
 
     private float _verticalVelocity;
-    private float _gravity = -15f;
-
     private float _fallTimeoutDelta;
     private bool _fallTransition = false;
-    private float _fallTimeout = 0.15f;
 
-    public FallState(BasicCharacterControllerMover mover, AgentAnimations agentAnimations, IAgentMovementInput movementInput)
+    MovementHelper _movementHelper = new();
+
+    public FallState(BasicCharacterControllerMover mover, AgentAnimations agentAnimations, IAgentMovementInput movementInput, AgentStats agentStats)
     {
         _mover = mover;
         _agentAnimations = agentAnimations;
         _input = movementInput;
+        _agentStats = agentStats;
     }
 
     public override void Enter()
@@ -40,7 +38,7 @@ public class FallState : State
         if (_fallTransition == false && _fallTimeoutDelta > 0)
         {
             _fallTransition = true;
-            _fallTimeoutDelta = _fallTimeout;
+            _fallTimeoutDelta = _agentStats.FallTimeout;
         }
         else
         {
@@ -52,9 +50,11 @@ public class FallState : State
             _fallTransition = false;
         }
 
-        float targetMovementSpeed = _input.SprintInput ? _sprintSpeed : _moveSpeed;
-        targetMovementSpeed = _input.MovementInput == Vector2.zero ? 0 : targetMovementSpeed;
-        _verticalVelocity += _gravity * Time.deltaTime;
-        _mover.Move(new Vector3(_input.MovementInput.x, _verticalVelocity, _input.MovementInput.y), targetMovementSpeed);
+        _verticalVelocity += _agentStats.Gravity * Time.deltaTime;
+
+        //float targetMovementSpeed = _input.SprintInput ? _sprintSpeed : _moveSpeed;
+        //targetMovementSpeed = _input.MovementInput == Vector2.zero ? 0 : targetMovementSpeed;
+        //_mover.Move(new Vector3(_input.MovementInput.x, _verticalVelocity, _input.MovementInput.y), targetMovementSpeed);
+        _movementHelper.PerformMovement(_input, _agentStats, _mover, _verticalVelocity);
     }
 }

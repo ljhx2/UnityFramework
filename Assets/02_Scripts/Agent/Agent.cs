@@ -16,13 +16,24 @@ public class Agent : MonoBehaviour
 
     private IAgentJumpInput _jumpInput;
 
+    private IAgentWaveInput _waveInput;
+
+    private IAgentInteractInput _interactInput;
+
+    private AgentStats _agentStats;
+    
+
     private void Awake()
     {
         _input = GetComponent<IAgentMovementInput>();
         _jumpInput = GetComponent<IAgentJumpInput>();
+        _waveInput = GetComponent<IAgentWaveInput>();
+        _interactInput = GetComponent<IAgentInteractInput>();
+
         _groundDetector = GetComponent<GroundedDetector>();
         _agentAnimations = GetComponent<AgentAnimations>();
         _mover = GetComponent<BasicCharacterControllerMover>();
+        _agentStats = GetComponent<AgentStats>();
     }
 
     private void Start()
@@ -51,10 +62,14 @@ public class Agent : MonoBehaviour
             newState.AddTransition(new GroundedFallTransition(_groundDetector));
             if (_jumpInput != null)
                 newState.AddTransition(new JumpTransition(_jumpInput));
+            if (_waveInput != null)
+                newState.AddTransition(new MoveWaveTransition(_waveInput));
+            if (_interactInput != null)
+                newState.AddTransition(new MoveInteractTransition(_interactInput));
         }
         else if (stateType == typeof(FallState))
         {
-            newState = new FallState(_mover, _agentAnimations, _input);
+            newState = new FallState(_mover, _agentAnimations, _input, _agentStats);
             newState.AddTransition(new FallLandTransition(_groundDetector));
         }
         else if (stateType == typeof(LandState))
@@ -64,8 +79,18 @@ public class Agent : MonoBehaviour
         }
         else if (stateType == typeof(JumpState))
         {
-            newState = new JumpState(_mover, _agentAnimations, _input);
+            newState = new JumpState(_mover, _agentAnimations, _input, _agentStats);
             newState.AddTransition(new JumpFallTransition(_mover));
+        }
+        else if (stateType == typeof(WaveState))
+        {
+            newState = new WaveState(_agentAnimations);
+            newState.AddTransition(new WaveMoveTransition());
+        }
+        else if (stateType == typeof(InteractState))
+        {
+            newState = new InteractState(_agentAnimations);
+            newState.AddTransition(new InteractMoveTransition());
         }
         else
         {

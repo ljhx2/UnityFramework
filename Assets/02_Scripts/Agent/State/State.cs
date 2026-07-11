@@ -23,6 +23,13 @@ public abstract class State
         {
             if (rule.ShouldTransition(deltaTime))
             {
+                foreach (ITransitionRule transition in _transitionRules)
+                {
+                    if (transition is IEventTransitionRule eventTransition)
+                    {
+                        eventTransition.Unsubscribe();
+                    }
+                }
                 OnTransition?.Invoke(rule.NextState);
                 return true;
             }
@@ -32,5 +39,10 @@ public abstract class State
     public void AddTransition(ITransitionRule rule)
     {
         _transitionRules.Add(rule);
+
+        if (rule is IEventTransitionRule eventTransition)
+        {
+            eventTransition.Subscribe();
+        }
     }
 }

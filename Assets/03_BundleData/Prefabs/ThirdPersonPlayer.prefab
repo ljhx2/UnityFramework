@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8687155702037580115}
   - component: {fileID: 8130916935691015467}
   - component: {fileID: 8763702394505584788}
+  - component: {fileID: 4149108106184404100}
   m_Layer: 6
   m_Name: ThirdPersonPlayer
   m_TagString: Untagged
@@ -109,6 +110,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 980e881e-182c-404c-8cbf-3d09fdb48fef
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c34f5e14-0185-4b40-af30-e13aba39f1f5
+    m_ActionName: 'Player/Interact[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 12fa5d49-f3cd-4e5a-a160-865ba45a0c71
+    m_ActionName: 'Player/ToggleWeapon[/Keyboard/z]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -138,11 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23a4868fc9b55f468db3a632071e767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tips.Partm_1m_Start.PlayerMonolithic
-  MoveSpeed: 2
-  SprintSpeed: 5.335
-  SpeedChangeRate: 10
-  FallTimeout: 0.15
-  Gravity: -15
 --- !u!114 &4426766604110079682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +224,8 @@ MonoBehaviour:
   _animationFallTrigger: Fall
   _animationJumpTrigger: Jump
   _animationLandTrigger: Land
+  _animationWaveTrigger: Wave
+  _animationInteractTrigger: Interact
 --- !u!114 &8763702394505584788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +241,24 @@ MonoBehaviour:
   _rotationSmoothTime: 0.12
   _speedChangeRate: 10
   _rotationStrategy: {fileID: 0}
+--- !u!114 &4149108106184404100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30110938091981782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63cf005293f95594da4d68df3308fc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentStats
+  <MoveSpeed>k__BackingField: 2
+  <SprintSpeed>k__BackingField: 5.335
+  <Gravity>k__BackingField: -15
+  <SpeedChangeRate>k__BackingField: 10
+  <JumpHeight>k__BackingField: 1.2
+  <FallTimeout>k__BackingField: 0.15
 --- !u!1 &5783078426431019476
 GameObject:
   m_ObjectHideFlags: 0

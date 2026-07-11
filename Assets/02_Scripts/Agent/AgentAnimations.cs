@@ -6,7 +6,9 @@ public enum AnimationTriggerType
     None,
     Jump,
     Fall,
-    Land
+    Land,
+    Wave,
+    Interact
 }
 public enum AnimationFloatType
 {
@@ -29,6 +31,8 @@ public class AgentAnimations : MonoBehaviour
     [SerializeField] string _animationFallTrigger;
     [SerializeField] string _animationJumpTrigger;
     [SerializeField] string _animationLandTrigger;
+    [SerializeField] string _animationWaveTrigger;
+    [SerializeField] string _animationInteractTrigger;
 
     private Dictionary<AnimationFloatType, string> _floatParameters;
     private Dictionary<AnimationBoolType, string> _boolParameters;
@@ -57,6 +61,8 @@ public class AgentAnimations : MonoBehaviour
             { AnimationTriggerType.Jump, _animationJumpTrigger },
             { AnimationTriggerType.Fall, _animationFallTrigger },
             { AnimationTriggerType.Land, _animationLandTrigger },
+            { AnimationTriggerType.Wave, _animationWaveTrigger },
+            { AnimationTriggerType.Interact, _animationInteractTrigger },
         };
     }
 
@@ -98,5 +104,14 @@ public class AgentAnimations : MonoBehaviour
             return;
         }
         Debug.LogError($"Trigger parameter {triggerType} not configured.");
+    }
+
+    public float GetFloat(AnimationFloatType floatType)
+    {
+        if (_floatParameters.TryGetValue(floatType, out string paramName))
+        {
+            return _animator.GetFloat(paramName);
+        }
+        throw new System.Exception($"Float parameter {floatType} not configured.");
     }
 }

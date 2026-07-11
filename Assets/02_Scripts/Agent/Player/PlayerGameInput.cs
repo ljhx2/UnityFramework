@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerGameInput : MonoBehaviour, IAgentMovementInput, IAgentJumpInput
+public class PlayerGameInput : MonoBehaviour, IAgentMovementInput, IAgentJumpInput, IAgentInteractInput
 {
     private PlayerInput _input;
+
+    public event Action OnInteract;
 
     public bool JumpInput { get; private set; }
     public Vector2 MovementInput { get; private set; }
@@ -26,6 +29,8 @@ public class PlayerGameInput : MonoBehaviour, IAgentMovementInput, IAgentJumpInp
         _input.actions["Player/Look"].performed += OnLook;
         _input.actions["Player/Look"].canceled += OnLook;
         _input.actions["Player/Sprint"].performed += OnSprint;
+        _input.actions["Player/Interact"].performed += OnInteraction;
+        _input.actions["Player/Interact"].canceled += OnInteraction;
     }
 
     
@@ -39,6 +44,8 @@ public class PlayerGameInput : MonoBehaviour, IAgentMovementInput, IAgentJumpInp
         _input.actions["Player/Look"].performed -= OnLook;
         _input.actions["Player/Look"].canceled -= OnLook;
         _input.actions["Player/Sprint"].performed -= OnSprint;
+        _input.actions["Player/Interact"].performed -= OnInteraction;
+        _input.actions["Player/Interact"].canceled -= OnInteraction;
     }
 
     private void OnJump(InputAction.CallbackContext context)
@@ -58,4 +65,9 @@ public class PlayerGameInput : MonoBehaviour, IAgentMovementInput, IAgentJumpInp
         SprintInput = context.ReadValueAsButton();
     }
 
+    private void OnInteraction(InputAction.CallbackContext context)
+    {
+        if (context.ReadValueAsButton())
+            OnInteract?.Invoke();
+    }
 }
