@@ -20,6 +20,8 @@ public class Agent : MonoBehaviour
 
     private IAgentInteractInput _interactInput;
 
+    private InteractionDetector _interactDetector;
+
     private AgentStats _agentStats;
     
 
@@ -33,6 +35,7 @@ public class Agent : MonoBehaviour
         _groundDetector = GetComponent<GroundedDetector>();
         _agentAnimations = GetComponent<AgentAnimations>();
         _mover = GetComponent<BasicCharacterControllerMover>();
+        _interactDetector = GetComponent<InteractionDetector>();
         _agentStats = GetComponent<AgentStats>();
     }
 
@@ -43,6 +46,8 @@ public class Agent : MonoBehaviour
 
     private void Update()
     {
+        if (_interactDetector != null)
+            _interactDetector.DetectInteractable();
         if (_currentState != null)
             _currentState.Update(Time.deltaTime);
     }
@@ -65,7 +70,7 @@ public class Agent : MonoBehaviour
             if (_waveInput != null)
                 newState.AddTransition(new MoveWaveTransition(_waveInput));
             if (_interactInput != null)
-                newState.AddTransition(new MoveInteractTransition(_interactInput));
+                newState.AddTransition(new MoveInteractTransition(_interactInput, _interactDetector));
         }
         else if (stateType == typeof(FallState))
         {
@@ -89,7 +94,7 @@ public class Agent : MonoBehaviour
         }
         else if (stateType == typeof(InteractState))
         {
-            newState = new InteractState(_agentAnimations);
+            newState = new InteractState(_agentAnimations, _interactDetector);
             newState.AddTransition(new InteractMoveTransition());
         }
         else

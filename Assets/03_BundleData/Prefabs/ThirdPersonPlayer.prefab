@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 8130916935691015467}
   - component: {fileID: 8763702394505584788}
   - component: {fileID: 4149108106184404100}
+  - component: {fileID: 8899441730639319664}
   m_Layer: 6
   m_Name: ThirdPersonPlayer
   m_TagString: Untagged
@@ -259,6 +260,24 @@ MonoBehaviour:
   <SpeedChangeRate>k__BackingField: 10
   <JumpHeight>k__BackingField: 1.2
   <FallTimeout>k__BackingField: 0.15
+--- !u!114 &8899441730639319664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30110938091981782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084c87418b7c78346a18ba5964d2eaeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionDetector
+  _detectionRange: 1
+  _detectionRadius: 0.5
+  _height: 1
+  _detectionLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &5783078426431019476
 GameObject:
   m_ObjectHideFlags: 0

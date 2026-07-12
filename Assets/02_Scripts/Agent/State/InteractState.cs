@@ -3,14 +3,19 @@ using UnityEngine;
 public class InteractState : State
 {
     private AgentAnimations _agentAnimations;
+    private InteractionDetector _interactionDetector;
     private float _slowDownDelay = 0.3f;
     private float _delayTemp;
     private float _startAnimationSpeed;
 
-    public InteractState(AgentAnimations agentAnimations)
+    private float _interactDelay = 0.3f;
+    private bool _interactionFinishedFlag = false;
+
+    public InteractState(AgentAnimations agentAnimations, InteractionDetector interactionDetector)
     {
         _agentAnimations = agentAnimations;
         _delayTemp = _slowDownDelay;
+        _interactionDetector = interactionDetector;
     }
     public override void Enter()
     {
@@ -30,6 +35,22 @@ public class InteractState : State
         {
             _agentAnimations.SetFloat(AnimationFloatType.Speed, _startAnimationSpeed * _delayTemp / _slowDownDelay);
             _delayTemp -= deltaTime;
+        }
+
+        if (_interactionFinishedFlag)
+            return;
+
+        if (_interactDelay <= 0)
+        {
+            if (_interactionDetector.CurrentInteractable != null)
+            {
+                _interactionDetector.CurrentInteractable.Interact(_interactionDetector.gameObject);
+            }
+            _interactionFinishedFlag = true;
+        }
+        else
+        {
+            _interactDelay -= deltaTime;
         }
     }
 }

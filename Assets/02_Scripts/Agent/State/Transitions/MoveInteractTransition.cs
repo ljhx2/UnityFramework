@@ -3,13 +3,15 @@ using System;
 public class MoveInteractTransition : IEventTransitionRule
 {
     private IAgentInteractInput _interactInput;
+    private InteractionDetector _detector;
     private bool _interactFlag;
 
     public Type NextState => typeof(InteractState);
 
-    public MoveInteractTransition(IAgentInteractInput interactInput)
+    public MoveInteractTransition(IAgentInteractInput interactInput, InteractionDetector detector)
     {
         _interactInput = interactInput;
+        _detector = detector;
     }
 
     public bool ShouldTransition(float deltaTime)
@@ -29,6 +31,6 @@ public class MoveInteractTransition : IEventTransitionRule
 
     private void HandleInteraction()
     {
-        _interactFlag = true;
+        _interactFlag = _detector.CurrentInteractable != null;
     }
 }
