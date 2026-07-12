@@ -278,7 +278,7 @@ MonoBehaviour:
   _height: 1
   _detectionLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 4224
 --- !u!114 &1851355878279435861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +331,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5543575707688213628}
     m_Modifications:
+    - target: {fileID: 31475853808970450, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1306474277961935338, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2117880924415515586, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.048
@@ -371,13 +379,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -80.818
       objectReference: {fileID: 0}
+    - target: {fileID: 4212239409208150231, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436642322120997804, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543551432754520938, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135586794039460571, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7239252497633120463, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
       propertyPath: m_Name
       value: Staff
       objectReference: {fileID: 0}
     - target: {fileID: 7239252497633120463, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239252497633120463, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017327685902078658, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
