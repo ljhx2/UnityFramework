@@ -2381,7 +2381,6 @@ GameObject:
   - component: {fileID: 8276087545476137503}
   - component: {fileID: 5012806626439933927}
   - component: {fileID: 792738235970456489}
-  - component: {fileID: 4192910737745596731}
   - component: {fileID: 5686977178570986995}
   - component: {fileID: 4916195053119987671}
   - component: {fileID: 2621215856839569693}
@@ -2392,6 +2391,9 @@ GameObject:
   - component: {fileID: 2264584211932250412}
   - component: {fileID: 3138650085451877139}
   - component: {fileID: 7879114226137265986}
+  - component: {fileID: 7531968399475534593}
+  - component: {fileID: 4889049169816231938}
+  - component: {fileID: 1178239434497688823}
   m_Layer: 7
   m_Name: EnemtNPC
   m_TagString: Untagged
@@ -2427,7 +2429,7 @@ Animator:
   m_GameObject: {fileID: 8963260899122978755}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  m_Controller: {fileID: 9100000, guid: 46164ff49e0a4f4469c9d2cac4a46f31, type: 2}
+  m_Controller: {fileID: 9100000, guid: adcd187e19565bf419de4de2e57f72ff, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2464,18 +2466,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
   FootstepAudioVolume: 0.3
---- !u!114 &4192910737745596731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8963260899122978755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c23a4868fc9b55f468db3a632071e767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AgentMonolithic
 --- !u!114 &5686977178570986995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2527,6 +2517,7 @@ MonoBehaviour:
   _animationLandTrigger: Land
   _animationWaveTrigger: Wave
   _animationInteractTrigger: Interact
+  _animationAttackTrigger: Attack
 --- !u!114 &4759907878159926394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2643,6 +2634,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NavMeshMovementInput
   _target: {fileID: 0}
   _pointReachedDistance: 0.3
+--- !u!114 &7531968399475534593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963260899122978755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6432491e8135f4845b5eadf2b507bc8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavMeshEnemyAI
+  <Target>k__BackingField: {fileID: 0}
+  _attackDelay: 5
+  _stoppingDistance: 0.3
+--- !u!114 &4889049169816231938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963260899122978755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b588d44483da845b947ab8baf6b257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAgent
+--- !u!114 &1178239434497688823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963260899122978755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5b9f69046aa194db04b8005a91bddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimplePlayerDetector
+  _playerObject: {fileID: 0}
+  _isOn: 1
+  _detectionRadius: 5
+  OnDetectionUpdate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7531968399475534593}
+        m_TargetAssemblyTypeName: NavMeshEnemyAI, Assembly-CSharp
+        m_MethodName: set_Target
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9083316026316597552
 GameObject:
   m_ObjectHideFlags: 0

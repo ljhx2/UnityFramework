@@ -466,7 +466,6 @@ GameObject:
   - component: {fileID: 3916626253282367800}
   - component: {fileID: 2476350820345840302}
   - component: {fileID: 6142789734654566569}
-  - component: {fileID: 60586114519266302}
   - component: {fileID: 2539592740454812610}
   - component: {fileID: 6476273174670996194}
   - component: {fileID: 5878158459983366512}
@@ -476,6 +475,7 @@ GameObject:
   - component: {fileID: 8282086889791466503}
   - component: {fileID: 7052805575632736275}
   - component: {fileID: 1930196821573097098}
+  - component: {fileID: 1381010037892667595}
   m_Layer: 7
   m_Name: NPC
   m_TagString: Untagged
@@ -511,7 +511,7 @@ Animator:
   m_GameObject: {fileID: 1829922534887430264}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  m_Controller: {fileID: 9100000, guid: 46164ff49e0a4f4469c9d2cac4a46f31, type: 2}
+  m_Controller: {fileID: 9100000, guid: adcd187e19565bf419de4de2e57f72ff, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -573,18 +573,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
   FootstepAudioVolume: 0.3
---- !u!114 &60586114519266302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829922534887430264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c23a4868fc9b55f468db3a632071e767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AgentMonolithic
 --- !u!114 &2539592740454812610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,6 +642,7 @@ MonoBehaviour:
   _animationLandTrigger: Land
   _animationWaveTrigger: Wave
   _animationInteractTrigger: Interact
+  _animationAttackTrigger: Attack
 --- !u!114 &673971251631799859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,6 +726,18 @@ CapsuleCollider:
   m_Height: 1.07
   m_Direction: 1
   m_Center: {x: 0, y: 1.04, z: 0}
+--- !u!114 &1381010037892667595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829922534887430264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03aae5745f441a842a3c8c68fe524040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCAgent
 --- !u!1 &1908433187578950293
 GameObject:
   m_ObjectHideFlags: 0

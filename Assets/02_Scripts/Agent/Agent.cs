@@ -2,75 +2,55 @@ using System;
 using UnityEngine;
 
 
-public class Agent : MonoBehaviour
+public abstract class Agent : MonoBehaviour
 {
-    private IAgentMover _mover;
+    protected IAgentMover _mover;
 
-    private IAgentMovementInput _input;
-    
-    private GroundedDetector _groundDetector;
+    protected IAgentMovementInput _input;
 
-    private AgentAnimations _agentAnimations;
+    protected GroundedDetector _groundDetector;
 
-    private State _currentState;
+    protected AgentAnimations _agentAnimations;
 
-    private IAgentJumpInput _jumpInput;
+    protected State _currentState;
 
-    private IAgentWaveInput _waveInput;
-
-    private IAgentInteractInput _interactInput;
-
-    private InteractionDetector _interactDetector;
-
-    private AgentStats _agentStats;
+    protected AgentStats _agentStats;
     
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _input = GetComponent<IAgentMovementInput>();
-        _jumpInput = GetComponent<IAgentJumpInput>();
-        _waveInput = GetComponent<IAgentWaveInput>();
-        _interactInput = GetComponent<IAgentInteractInput>();
-
+        
         _groundDetector = GetComponent<GroundedDetector>();
         _agentAnimations = GetComponent<AgentAnimations>();
         _mover = GetComponent<IAgentMover>();
-        _interactDetector = GetComponent<InteractionDetector>();
         _agentStats = GetComponent<AgentStats>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         TransitionToState(typeof(MovementState));
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        if (_interactDetector != null)
-            _interactDetector.DetectInteractable();
         if (_currentState != null)
             _currentState.Update(Time.deltaTime);
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         _groundDetector.GroundedCheck();
         _agentAnimations.SetBool(AnimationBoolType.Grounded, _groundDetector.Grounded);
     }
 
-    private State StateFactory(Type stateType)
+    protected virtual State StateFactory(Type stateType)
     {
         State newState = null;
         if (stateType == typeof(MovementState))
         {
             newState = new MovementState(_mover, _groundDetector, _agentAnimations, _input);
             newState.AddTransition(new GroundedFallTransition(_groundDetector));
-            if (_jumpInput != null)
-                newState.AddTransition(new JumpTransition(_jumpInput));
-            if (_waveInput != null)
-                newState.AddTransition(new MoveWaveTransition(_waveInput));
-            if (_interactInput != null)
-                newState.AddTransition(new MoveInteractTransition(_interactInput, _interactDetector));
         }
         else if (stateType == typeof(FallState))
         {
@@ -81,21 +61,6 @@ public class Agent : MonoBehaviour
         {
             newState = new LandState(_agentAnimations);
             newState.AddTransition(new LandMovementTransition());
-        }
-        else if (stateType == typeof(JumpState))
-        {
-            newState = new JumpState(_mover, _agentAnimations, _input, _agentStats);
-            newState.AddTransition(new JumpFallTransition(_mover));
-        }
-        else if (stateType == typeof(WaveState))
-        {
-            newState = new WaveState(_agentAnimations);
-            newState.AddTransition(new WaveMoveTransition());
-        }
-        else if (stateType == typeof(InteractState))
-        {
-            newState = new InteractState(_agentAnimations, _interactDetector);
-            newState.AddTransition(new InteractMoveTransition());
         }
         else
         {

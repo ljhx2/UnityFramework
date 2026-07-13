@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1869136468840621156}
   - component: {fileID: 9164482297965533136}
   - component: {fileID: 8114984867654911913}
-  - component: {fileID: 3276251411770855042}
   - component: {fileID: 4426766604110079682}
   - component: {fileID: 8126606896537402501}
   - component: {fileID: 6802714118521675077}
@@ -22,6 +21,7 @@ GameObject:
   - component: {fileID: 4149108106184404100}
   - component: {fileID: 8899441730639319664}
   - component: {fileID: 1851355878279435861}
+  - component: {fileID: 1234610565321992632}
   m_Layer: 6
   m_Name: ThirdPersonPlayer
   m_TagString: Untagged
@@ -137,18 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f03f8552fc0ccd4e9af83e65e20b921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HideCursor
---- !u!114 &3276251411770855042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30110938091981782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c23a4868fc9b55f468db3a632071e767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Tips.Partm_1m_Start.PlayerMonolithic
 --- !u!114 &4426766604110079682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +216,7 @@ MonoBehaviour:
   _animationLandTrigger: Land
   _animationWaveTrigger: Wave
   _animationInteractTrigger: Interact
+  _animationAttackTrigger: Attack
 --- !u!114 &8763702394505584788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +281,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponHelper
   _weapon: {fileID: 6533494228127212847}
+--- !u!114 &1234610565321992632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30110938091981782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d90598387dec7849922eb5858e5d9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAgent
+  _weaponHelper: {fileID: 1851355878279435861}
 --- !u!1 &5783078426431019476
 GameObject:
   m_ObjectHideFlags: 0
