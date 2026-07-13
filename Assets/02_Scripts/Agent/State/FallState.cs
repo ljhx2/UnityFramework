@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FallState : State
 {
-    private BasicCharacterControllerMover _mover;
+    private IAgentMover _mover;
     private AgentAnimations _agentAnimations;
     private IAgentMovementInput _input;
     private AgentStats _agentStats;
@@ -13,7 +13,7 @@ public class FallState : State
 
     MovementHelper _movementHelper = new();
 
-    public FallState(BasicCharacterControllerMover mover, AgentAnimations agentAnimations, IAgentMovementInput movementInput, AgentStats agentStats)
+    public FallState(IAgentMover mover, AgentAnimations agentAnimations, IAgentMovementInput movementInput, AgentStats agentStats)
     {
         _mover = mover;
         _agentAnimations = agentAnimations;

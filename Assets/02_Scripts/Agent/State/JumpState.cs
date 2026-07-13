@@ -5,14 +5,14 @@ public class JumpState : State
 {
     private AgentAnimations _agentAnimations;
     private IAgentMovementInput _input;
-    private BasicCharacterControllerMover _mover;
+    private IAgentMover _mover;
     private AgentStats _agentStats;
 
     private float _verticalVelocity;
 
     MovementHelper _movementHelper = new();
     
-    public JumpState(BasicCharacterControllerMover mover, AgentAnimations agentAnimations, IAgentMovementInput input, AgentStats agentStats)
+    public JumpState(IAgentMover mover, AgentAnimations agentAnimations, IAgentMovementInput input, AgentStats agentStats)
     {
         _agentAnimations = agentAnimations;
         _mover = mover;

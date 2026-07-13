@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovementState : State
 {
-    private BasicCharacterControllerMover _mover;
+    private IAgentMover _mover;
     private GroundedDetector _groundedDetector;
     private AgentAnimations _agentAnimations;
     private IAgentMovementInput _input;
@@ -16,7 +16,7 @@ public class MovementState : State
     private float _animationMovementSpeed;
     private float _speedChangeRate = 10f;
 
-    public MovementState(BasicCharacterControllerMover mover, GroundedDetector groundedDetector, AgentAnimations agentAnimations, IAgentMovementInput movementInput)
+    public MovementState(IAgentMover mover, GroundedDetector groundedDetector, AgentAnimations agentAnimations, IAgentMovementInput movementInput)
     {
         _mover = mover;
         _groundedDetector = groundedDetector;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
-    private BasicCharacterControllerMover _mover;
+    private IAgentMover _mover;
 
     private IAgentMovementInput _input;
     
@@ -34,7 +34,7 @@ public class Agent : MonoBehaviour
 
         _groundDetector = GetComponent<GroundedDetector>();
         _agentAnimations = GetComponent<AgentAnimations>();
-        _mover = GetComponent<BasicCharacterControllerMover>();
+        _mover = GetComponent<IAgentMover>();
         _interactDetector = GetComponent<InteractionDetector>();
         _agentStats = GetComponent<AgentStats>();
     }

@@ -5,11 +5,11 @@ public class JumpFallTransition : ITransitionRule
 {
     public Type NextState => typeof(FallState);
 
-    private BasicCharacterControllerMover _mover;
+    private IAgentMover _mover;
 
     private float _checkDelay = 0.2f;
 
-    public JumpFallTransition(BasicCharacterControllerMover mover)
+    public JumpFallTransition(IAgentMover mover)
     {
         _mover = mover;
     }

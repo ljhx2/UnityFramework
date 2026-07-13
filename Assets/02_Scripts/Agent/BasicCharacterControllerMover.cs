@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BasicCharacterControllerMover : MonoBehaviour
+public class BasicCharacterControllerMover : MonoBehaviour, IAgentMover
 {
     [Header("Movement Parameters")]
     [SerializeField] private float _rotationSmoothTime = 0.12f;
