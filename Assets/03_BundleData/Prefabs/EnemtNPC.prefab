@@ -2385,7 +2385,6 @@ GameObject:
   - component: {fileID: 4916195053119987671}
   - component: {fileID: 2621215856839569693}
   - component: {fileID: 4759907878159926394}
-  - component: {fileID: 358399545371783626}
   - component: {fileID: 7134894687799400804}
   - component: {fileID: 6845132446136103941}
   - component: {fileID: 2264584211932250412}
@@ -2429,7 +2428,7 @@ Animator:
   m_GameObject: {fileID: 8963260899122978755}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  m_Controller: {fileID: 9100000, guid: adcd187e19565bf419de4de2e57f72ff, type: 2}
+  m_Controller: {fileID: 22100000, guid: 5f0f80bfa46416e45a7069e33739f297, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2518,6 +2517,7 @@ MonoBehaviour:
   _animationWaveTrigger: Wave
   _animationInteractTrigger: Interact
   _animationAttackTrigger: Attack
+  _animationHitTrigger: 
 --- !u!114 &4759907878159926394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,19 +2536,6 @@ MonoBehaviour:
   <SpeedChangeRate>k__BackingField: 10
   <JumpHeight>k__BackingField: 1.2
   <FallTimeout>k__BackingField: 0.15
---- !u!114 &358399545371783626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8963260899122978755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f512d490bbf7324cb98dda6fe9a8bf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCInteractable
-  _delayBetweenInteractions: 3
 --- !u!114 &7134894687799400804
 MonoBehaviour:
   m_ObjectHideFlags: 0

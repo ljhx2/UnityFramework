@@ -49,7 +49,7 @@ public abstract class Agent : MonoBehaviour
         State newState = null;
         if (stateType == typeof(MovementState))
         {
-            newState = new MovementState(_mover, _groundDetector, _agentAnimations, _input);
+            newState = new MovementState(_mover, _groundDetector, _agentAnimations, _input, _agentStats);
             newState.AddTransition(new GroundedFallTransition(_groundDetector));
         }
         else if (stateType == typeof(FallState))
@@ -59,7 +59,7 @@ public abstract class Agent : MonoBehaviour
         }
         else if (stateType == typeof(LandState))
         {
-            newState = new LandState(_agentAnimations);
+            newState = new LandState(_agentAnimations, _agentStats);
             newState.AddTransition(new LandMovementTransition());
         }
         else

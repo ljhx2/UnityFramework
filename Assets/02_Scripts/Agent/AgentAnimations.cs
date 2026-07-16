@@ -9,7 +9,8 @@ public enum AnimationTriggerType
     Land,
     Wave,
     Interact,
-    Attack
+    Attack,
+    Hit
 }
 public enum AnimationFloatType
 {
@@ -35,6 +36,7 @@ public class AgentAnimations : MonoBehaviour
     [SerializeField] string _animationWaveTrigger;
     [SerializeField] string _animationInteractTrigger;
     [SerializeField] string _animationAttackTrigger;
+    [SerializeField] string _animationHitTrigger;
 
     private Dictionary<AnimationFloatType, string> _floatParameters;
     private Dictionary<AnimationBoolType, string> _boolParameters;
@@ -65,7 +67,8 @@ public class AgentAnimations : MonoBehaviour
             { AnimationTriggerType.Land, _animationLandTrigger },
             { AnimationTriggerType.Wave, _animationWaveTrigger },
             { AnimationTriggerType.Interact, _animationInteractTrigger },
-            { AnimationTriggerType.Attack, _animationAttackTrigger }
+            { AnimationTriggerType.Attack, _animationAttackTrigger },
+            { AnimationTriggerType.Hit, _animationHitTrigger }
         };
     }
 

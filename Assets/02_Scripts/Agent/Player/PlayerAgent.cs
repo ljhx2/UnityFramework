@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class PlayerAgent : Agent
 {
@@ -9,7 +8,11 @@ public class PlayerAgent : Agent
 
     private InteractionDetector _interactionDetector;
 
-    [SerializeField] private WeaponHelper _weaponHelper;
+    private WeaponHelper _weaponHelper;
+
+    private IAgentAttackInput _attackInput;
+
+    private IAgentToggleWeaponInput _toggleWeaponInput;
 
     protected override void Awake()
     {
@@ -18,6 +21,8 @@ public class PlayerAgent : Agent
         _interactInput = GetComponent<IAgentInteractInput>();
         _interactionDetector = GetComponent<InteractionDetector>();
         _weaponHelper = GetComponent<WeaponHelper>();
+        _attackInput = GetComponent<IAgentAttackInput>();
+        _toggleWeaponInput = GetComponent<IAgentToggleWeaponInput>();
     }
 
     protected override void Update()
@@ -39,13 +44,34 @@ public class PlayerAgent : Agent
             newState = new InteractState(_agentAnimations, _interactionDetector);
             newState.AddTransition(new InteractMoveTransition());
         }
+        else if (stateType == typeof(DrawWeaponState))
+        {
+            newState = new DrawWeaponState(_weaponHelper, _mover, _agentAnimations, _input, _groundDetector, _agentStats);
+            newState.AddTransition(new DelayedTransition(0.2f, typeof(MovementState)));
+        }
+        else if (stateType == typeof(AttackState))
+        {
+            newState = new AttackState(_agentAnimations, _mover, _agentStats);
+            newState.AddTransition(new DelayedTransition(0.35f, typeof(MovementState)));
+        }
         else
         {
             newState = base.StateFactory(stateType);
             if (stateType == typeof(MovementState))
             {
                 newState.AddTransition(new JumpTransition(_jumpInput));
-                newState.AddTransition(new MoveInteractTransition(_interactInput, _interactionDetector));
+                if (_weaponHelper.HasWeapon == false || _weaponHelper.IsWeaponHolstered)
+                {
+                    newState.AddTransition(new MoveInteractTransition(_interactInput, _interactionDetector));
+                }
+                if (_weaponHelper.HasWeapon && _weaponHelper.IsWeaponHolstered == false)
+                {
+                    newState.AddTransition(new MoveAttackTransition(_attackInput));
+                }
+                if (_weaponHelper.HasWeapon)
+                {
+                    newState.AddTransition(new MoveDrawWeaponTransition(_toggleWeaponInput));
+                }
             }
         }
         return newState;

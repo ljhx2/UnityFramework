@@ -394,11 +394,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5378725232003526363, guid: d5ba90f98ae52d94592b3f8c67d680b5, type: 3}
   m_PrefabInstance: {fileID: 5301694346049950738}
   m_PrefabAsset: {fileID: 0}
---- !u!137 &742845413 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1792479422678441762, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
-  m_PrefabInstance: {fileID: 2482868501859341312}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &746329221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1898,52 +1893,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Staff
       objectReference: {fileID: 0}
-    - target: {fileID: 7239252497633120463, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7239252497633120463, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 2482868501859341314}
-    - targetCorrespondingSourceObject: {fileID: 7239252497633120463, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2482868501859341318}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
---- !u!1 &2482868501859341313 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7239252497633120463, guid: 2a8afcd87f6d6744eaec0bc20a44a351, type: 3}
-  m_PrefabInstance: {fileID: 2482868501859341312}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2482868501859341314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2482868501859341313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f50fd7b8bba947d43a286dfd6a7f0c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponPickUpInteraction
---- !u!114 &2482868501859341318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2482868501859341313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d58828d48cbad4a9c6ca462519232a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Highlight
-  _objectRenderer: {fileID: 742845413}
-  _outlineLayerName: Outline
 --- !u!1001 &5301694346049950738
 PrefabInstance:
   m_ObjectHideFlags: 0

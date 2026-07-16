@@ -6,22 +6,20 @@ public class MovementState : State
     private GroundedDetector _groundedDetector;
     private AgentAnimations _agentAnimations;
     private IAgentMovementInput _input;
+    private AgentStats _agentStats;
 
-    private float _moveSpeed = 2f;
-    private float _sprintSpeed = 5.335f;
-
+    
     private float _verticalVelocity;
-    private float _gravity = -15f;
 
-    private float _animationMovementSpeed;
-    private float _speedChangeRate = 10f;
+    MovementHelper _movementHelper = new();
 
-    public MovementState(IAgentMover mover, GroundedDetector groundedDetector, AgentAnimations agentAnimations, IAgentMovementInput movementInput)
+    public MovementState(IAgentMover mover, GroundedDetector groundedDetector, AgentAnimations agentAnimations, IAgentMovementInput movementInput, AgentStats agentStats)
     {
         _mover = mover;
         _groundedDetector = groundedDetector;
         _agentAnimations = agentAnimations;
         _input = movementInput;
+        _agentStats = agentStats;
     }
 
     public override void Enter()
@@ -38,22 +36,20 @@ public class MovementState : State
     {
         if (_groundedDetector.Grounded == false)
         {
-            _verticalVelocity += _gravity * Time.deltaTime;
+            _verticalVelocity += _agentStats.Gravity * Time.deltaTime;
         }
         else
         {
             _verticalVelocity = 0f;
         }
 
-        float targetMovementSpeed = _input.SprintInput ? _sprintSpeed : _moveSpeed;
-        _mover.Move(new Vector3(_input.MovementInput.x, _verticalVelocity, _input.MovementInput.y), targetMovementSpeed);
+        float targetMovementSpeed = _movementHelper.PerformMovement(_input, _agentStats, _mover, _verticalVelocity);
+        
+        _agentStats.AnimationMovementSpeed = Mathf.Lerp(_agentStats.AnimationMovementSpeed, targetMovementSpeed, Time.deltaTime * _agentStats.SpeedChangeRate);
+        if (_agentStats.AnimationMovementSpeed < 0.01f)
+            _agentStats.AnimationMovementSpeed = 0f;
 
-        targetMovementSpeed = _input.MovementInput == Vector2.zero ? 0 : targetMovementSpeed;
-        _animationMovementSpeed = Mathf.Lerp(_animationMovementSpeed, targetMovementSpeed, Time.deltaTime * _speedChangeRate);
-        if (_animationMovementSpeed < 0.01f)
-            _animationMovementSpeed = 0f;
-
-        _agentAnimations.SetFloat(AnimationFloatType.Speed, _animationMovementSpeed);
+        _agentAnimations.SetFloat(AnimationFloatType.Speed, _agentStats.AnimationMovementSpeed);
     }
 
     

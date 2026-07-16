@@ -16,7 +16,7 @@ public class EnemyAgent : Agent
         State newState = null;
         if (stateType == typeof(AttackState))
         {
-            newState = new AttackState(_agentAnimations, _mover);
+            newState = new AttackState(_agentAnimations, _mover, _agentStats);
             newState.AddTransition(new DelayedTransition(2f, typeof(MovementState)));
         }
         else

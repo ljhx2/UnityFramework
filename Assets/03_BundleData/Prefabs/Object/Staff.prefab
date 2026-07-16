@@ -266,7 +266,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2117880924415515586}
   - component: {fileID: 4739264850868323960}
-  m_Layer: 0
+  - component: {fileID: 8214627463014965210}
+  - component: {fileID: 7853282432362580895}
+  m_Layer: 12
   m_Name: Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,6 +313,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1898374, y: 0.08387733, z: 1.385039}
   m_Center: {x: -0.000000008669442, y: -0.00007111952, z: 0.2911446}
+--- !u!114 &8214627463014965210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7239252497633120463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d58828d48cbad4a9c6ca462519232a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlight
+  _objectRenderer: {fileID: 1792479422678441762}
+  _outlineLayerName: Outline
+--- !u!114 &7853282432362580895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7239252497633120463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50fd7b8bba947d43a286dfd6a7f0c0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponPickUpInteraction
 --- !u!1 &9017327685902078658
 GameObject:
   m_ObjectHideFlags: 0

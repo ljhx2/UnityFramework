@@ -15,4 +15,5 @@ public class AgentStats : MonoBehaviour
     public float JumpHeight { get; private set; } = 1.2f;
     [field: SerializeField]
     public float FallTimeout { get; private set; } = 0.15f;
+    public float AnimationMovementSpeed { get; set; }
 }

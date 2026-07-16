@@ -511,7 +511,7 @@ Animator:
   m_GameObject: {fileID: 1829922534887430264}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  m_Controller: {fileID: 9100000, guid: adcd187e19565bf419de4de2e57f72ff, type: 2}
+  m_Controller: {fileID: 22100000, guid: 758727a539f3d374896e02d725fcfabe, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -643,6 +643,7 @@ MonoBehaviour:
   _animationWaveTrigger: Wave
   _animationInteractTrigger: Interact
   _animationAttackTrigger: Attack
+  _animationHitTrigger: 
 --- !u!114 &673971251631799859
 MonoBehaviour:
   m_ObjectHideFlags: 0
