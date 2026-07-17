@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackState : State
@@ -5,12 +6,21 @@ public class AttackState : State
     private AgentAnimations _agentAnimations;
     private IAgentMover _mover;
     private AgentStats _agentStats;
+    private GameObject _agent;
+    private HitDetector _hitDetector;
 
-    public AttackState(AgentAnimations agentAnimations, IAgentMover mover, AgentStats agentStats)
+    private float _detectionDelay;
+    private float _currentTime = 0f;
+
+    public AttackState(AgentAnimations agentAnimations, IAgentMover mover, AgentStats agentStats, GameObject agent,HitDetector hitDetector, float detectionDelay)
     {
         _agentAnimations = agentAnimations;
         _mover = mover;
         _agentStats = agentStats;
+        _agent = agent;
+        _hitDetector = hitDetector;
+        _detectionDelay = detectionDelay;
+
     }
     public override void Enter()
     {
@@ -27,6 +37,24 @@ public class AttackState : State
 
     protected override void StateUpdate(float deltaTime)
     {
-        return;
+        if (_currentTime < 0f)
+            return;
+
+        _currentTime += Time.deltaTime;
+        if (_currentTime >= _detectionDelay)
+        {
+            _currentTime = -1f;
+            Dictionary<Collider, List<IDamageable>> result = _hitDetector.PerformDetection();
+            if (result != null)
+            {
+                foreach (var collider in result.Keys)
+                {
+                    foreach (var damageable in result[collider])
+                    {
+                        damageable.TakeDamage(new DamageData() { Sender = _agent, DamageAmount = 1 });
+                    }
+                }
+            }
+        }
     }
 }

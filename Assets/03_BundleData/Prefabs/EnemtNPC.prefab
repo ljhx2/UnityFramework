@@ -1715,7 +1715,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f3a1c2e7b253b844a96c0d8b275c6d4b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
@@ -2403,6 +2403,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5111554392665732751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8557794746091770664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6815167232506055464}
+  - component: {fileID: 4030317229861232044}
+  m_Layer: 7
+  m_Name: HitSphereDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6815167232506055464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557794746091770664}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8276087545476137503}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4030317229861232044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557794746091770664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c439e1eaf970134f912673a92634ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SphereDetector
+  _detectionRange: 1
+  _detectionRadius: 0.5
+  _height: 1
+  _detectionLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8703095934463992080
 GameObject:
   m_ObjectHideFlags: 0
@@ -2524,6 +2574,7 @@ GameObject:
   - component: {fileID: 1178239434497688823}
   - component: {fileID: 4165254305555995121}
   - component: {fileID: 2506345824512448337}
+  - component: {fileID: 3607986424025727350}
   m_Layer: 7
   m_Name: EnemtNPC
   m_TagString: Untagged
@@ -2548,6 +2599,7 @@ Transform:
   - {fileID: 4728793981642603365}
   - {fileID: 3427138319735120646}
   - {fileID: 7756007026484031222}
+  - {fileID: 6815167232506055464}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5012806626439933927
@@ -2767,7 +2819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NavMeshEnemyAI
   <Target>k__BackingField: {fileID: 0}
   _attackDelay: 5
-  _stoppingDistance: 0.3
+  _stoppingDistance: 0.6
 --- !u!114 &4889049169816231938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2838,6 +2890,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudioGetHitEffect
   _audioSource: {fileID: 5716882851940746913}
+--- !u!114 &3607986424025727350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963260899122978755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebee39efcf7fce748899446aa05d51cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitDetector
+  _sphereDetector: {fileID: 4030317229861232044}
 --- !u!1 &9083316026316597552
 GameObject:
   m_ObjectHideFlags: 0

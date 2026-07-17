@@ -17,12 +17,14 @@ public class SphereDetector : MonoBehaviour
         _hitColliders = new Collider[MAX_COLLIDER_COUNT];
     }
 
-    public Collider[] DetectObject()
+    public Collider[] DetectObject(out int hitCount)
     {
-        int numColliders = Physics.OverlapSphereNonAlloc(GetDetectionPosition(), _detectionRadius, _hitColliders, _detectionLayer);
+        hitCount = Physics.OverlapSphereNonAlloc(GetDetectionPosition(), _detectionRadius, _hitColliders, _detectionLayer);
 
-        if (numColliders > 0) return _hitColliders;
-        else return null;
+        if (hitCount > 0) 
+            return _hitColliders;
+        else
+            return null;
     }
 
     public Vector3 GetDetectionPosition()

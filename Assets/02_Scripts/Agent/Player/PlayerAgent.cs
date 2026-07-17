@@ -14,6 +14,8 @@ public class PlayerAgent : Agent
 
     private IAgentToggleWeaponInput _toggleWeaponInput;
 
+    private HitDetector _hitDetector;
+
     private Health _health;
 
     protected override void Awake()
@@ -25,6 +27,7 @@ public class PlayerAgent : Agent
         _weaponHelper = GetComponent<WeaponHelper>();
         _attackInput = GetComponent<IAgentAttackInput>();
         _toggleWeaponInput = GetComponent<IAgentToggleWeaponInput>();
+        _hitDetector = GetComponent<HitDetector>();
         _health = GetComponent<Health>();
     }
 
@@ -54,7 +57,7 @@ public class PlayerAgent : Agent
         }
         else if (stateType == typeof(AttackState))
         {
-            newState = new AttackState(_agentAnimations, _mover, _agentStats);
+            newState = new AttackState(_agentAnimations, _mover, _agentStats, gameObject, _hitDetector, 0.03f);
             newState.AddTransition(new DelayedTransition(0.35f, typeof(MovementState)));
         }
         else

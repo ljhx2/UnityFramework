@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 6921270998209880464}
   - component: {fileID: 6957544885951720391}
   - component: {fileID: 117549709133869203}
+  - component: {fileID: 4291604594076419043}
   m_Layer: 6
   m_Name: ThirdPersonPlayer
   m_TagString: Untagged
@@ -48,6 +49,8 @@ Transform:
   - {fileID: 5543575707688213296}
   - {fileID: 5824623964678420868}
   - {fileID: 37627835083460026}
+  - {fileID: 8545407132282266792}
+  - {fileID: 6379339373326205185}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &1869136468840621156
@@ -267,12 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084c87418b7c78346a18ba5964d2eaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractionDetector
-  _detectionRange: 1
-  _detectionRadius: 0.5
-  _height: 1
-  _detectionLayer:
-    serializedVersion: 2
-    m_Bits: 4224
+  _sphereDetector: {fileID: 7896779280213100506}
 --- !u!114 &1851355878279435861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +338,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerGetHitEffect
   _takeDamageEffect: {fileID: 0}
+--- !u!114 &4291604594076419043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30110938091981782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebee39efcf7fce748899446aa05d51cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitDetector
+  _sphereDetector: {fileID: 7090523292372286349}
+--- !u!1 &3487817758822467987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8545407132282266792}
+  - component: {fileID: 7896779280213100506}
+  m_Layer: 6
+  m_Name: InteractionSphereDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8545407132282266792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487817758822467987}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5378725232003526363}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7896779280213100506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487817758822467987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c439e1eaf970134f912673a92634ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SphereDetector
+  _detectionRange: 1
+  _detectionRadius: 0.5
+  _height: 1
+  _detectionLayer:
+    serializedVersion: 2
+    m_Bits: 4224
 --- !u!1 &5783078426431019476
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +432,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5378725232003526363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6272007340149192799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6379339373326205185}
+  - component: {fileID: 7090523292372286349}
+  m_Layer: 6
+  m_Name: HitSphereDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6379339373326205185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272007340149192799}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5378725232003526363}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7090523292372286349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272007340149192799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c439e1eaf970134f912673a92634ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SphereDetector
+  _detectionRange: 1
+  _detectionRadius: 0.5
+  _height: 1
+  _detectionLayer:
+    serializedVersion: 2
+    m_Bits: 12416
 --- !u!1 &7030606327695001106
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +526,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 2b4859293e620534bb3faf7f05b57a2e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0

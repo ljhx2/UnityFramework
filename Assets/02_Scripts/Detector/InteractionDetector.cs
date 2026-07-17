@@ -9,8 +9,8 @@ public class InteractionDetector : MonoBehaviour
 
     public void DetectInteractable()
     {
-        Collider[] result = _sphereDetector.DetectObject();
-        if (result != null && result.Length > 0)
+        Collider[] result = _sphereDetector.DetectObject(out int hitCount);
+        if (result != null && hitCount > 0)
         {
             IInteractable interactable = result[0].GetComponent<IInteractable>();
             Highlight highlight = result[0].GetComponent<Highlight>();
