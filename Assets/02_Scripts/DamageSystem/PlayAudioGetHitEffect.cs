@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAudioGetHitEffect : MonoBehaviour, IDamageable
+public class PlayAudioGetHitEffect : MonoBehaviour, IDamageable
 {
     [SerializeField] private AudioSource _audioSource;
 

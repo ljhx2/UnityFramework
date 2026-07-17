@@ -2068,6 +2068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 314679557107450998, guid: 0af9240fec56ad34fa4a14d83b1f9959, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1971187418873493031, guid: 0af9240fec56ad34fa4a14d83b1f9959, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.87
