@@ -14,6 +14,8 @@ public class PlayerAgent : Agent
 
     private IAgentToggleWeaponInput _toggleWeaponInput;
 
+    private Health _health;
+
     protected override void Awake()
     {
         base.Awake();
@@ -23,6 +25,7 @@ public class PlayerAgent : Agent
         _weaponHelper = GetComponent<WeaponHelper>();
         _attackInput = GetComponent<IAgentAttackInput>();
         _toggleWeaponInput = GetComponent<IAgentToggleWeaponInput>();
+        _health = GetComponent<Health>();
     }
 
     protected override void Update()
