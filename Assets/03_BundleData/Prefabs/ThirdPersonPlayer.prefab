@@ -224,7 +224,7 @@ MonoBehaviour:
   _animationWaveTrigger: Wave
   _animationInteractTrigger: Interact
   _animationAttackTrigger: Attack
-  _animationHitTrigger: 
+  _animationHitTrigger: Hit
 --- !u!114 &8763702394505584788
 MonoBehaviour:
   m_ObjectHideFlags: 0

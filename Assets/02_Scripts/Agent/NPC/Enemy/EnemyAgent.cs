@@ -25,6 +25,10 @@ public class EnemyAgent : Agent
             newState = new AttackState(_agentAnimations, _mover, _agentStats, gameObject, _hitDetector, 0.2f);
             newState.AddTransition(new DelayedTransition(2f, typeof(MovementState)));
         }
+        else if (stateType == typeof(NavMeshNPCDeathState))
+        {
+            newState = new NavMeshNPCDeathState(gameObject);
+        }
         else
         {
             newState = base.StateFactory(stateType);
@@ -33,7 +37,7 @@ public class EnemyAgent : Agent
                 newState.AddTransition(new MoveAttackTransition(_attackInput));
             }
         }
-
+        newState.AddTransition(new NPCDeathTransition(_health));
         return newState;
     }
 }

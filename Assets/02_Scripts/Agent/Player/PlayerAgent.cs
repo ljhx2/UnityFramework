@@ -60,6 +60,11 @@ public class PlayerAgent : Agent
             newState = new AttackState(_agentAnimations, _mover, _agentStats, gameObject, _hitDetector, 0.03f);
             newState.AddTransition(new DelayedTransition(0.35f, typeof(MovementState)));
         }
+        else if (stateType == typeof(GetHitState))
+        {
+            newState = new GetHitState(_agentAnimations, _mover, _agentStats);
+            newState.AddTransition(new DelayedTransition(0.32f, typeof(MovementState)));
+        }
         else
         {
             newState = base.StateFactory(stateType);
@@ -78,6 +83,7 @@ public class PlayerAgent : Agent
                 {
                     newState.AddTransition(new MoveDrawWeaponTransition(_toggleWeaponInput));
                 }
+                newState.AddTransition(new GetHitTransition(_health));
             }
         }
         return newState;

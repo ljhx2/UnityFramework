@@ -11,6 +11,7 @@ public class NavMeshEnemyAI : MonoBehaviour, IAgentAttackInput
 
     [SerializeField] private float _stoppingDistance = 0.3f;
 
+    public bool IsDead { get; set; }
     public event Action OnAttackInput;
 
     private void Awake()
@@ -20,6 +21,11 @@ public class NavMeshEnemyAI : MonoBehaviour, IAgentAttackInput
 
     private void Update()
     {
+        if (IsDead)
+        {
+            _navMeshMovementInput.SetTarget(null);
+            return;
+        }
         if (_navMeshMovementInput == null) return;
 
         if (Target == null)
