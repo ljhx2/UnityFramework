@@ -9,35 +9,19 @@ public class HitDetector : MonoBehaviour
 {
     [SerializeField] private SphereDetector _sphereDetector;
 
-    private Dictionary<Collider, List<IDamageable>> _hitObjects;
-    private List<IDamageable> _damageableList;
-
-    private void Awake()
-    {
-        _hitObjects = new Dictionary<Collider, List<IDamageable>>();
-        _damageableList = new List<IDamageable>();
-    }
-
     public Dictionary<Collider, List<IDamageable>> PerformDetection()
     {
-        Collider[] result = _sphereDetector.DetectObject(out int hitCount);
-        if (result != null && hitCount > 0)
+        Dictionary<Collider, List<IDamageable>> hitObjects = new Dictionary<Collider, List<IDamageable>>();
+        Collider[] result = _sphereDetector.DetectObject();
+        if (result.Length > 0)
         {
-            _hitObjects.Clear();
-            _damageableList.Clear();
-            for (int i = 0; i < hitCount; i++)
+            foreach (var collider in result)
             {
-                Collider collider = result[i];
-                collider.GetComponents(_damageableList);
-                if (_damageableList.Count > 0)
-                    _hitObjects.Add(collider, _damageableList);
-
-                //List<IDamageable> damagables = new(collider.GetComponents<IDamageable>());
-                //if (damagables.Count > 0)
-                //    _hitObjects.Add(collider, damagables);
+                List<IDamageable> damagables = new(collider.GetComponents<IDamageable>());
+                if (damagables.Count > 0)
+                    hitObjects.Add(collider, damagables);
             }
-            return _hitObjects;
         }
-        return null;
+        return hitObjects;
     }
 }

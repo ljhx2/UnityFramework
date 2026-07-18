@@ -9,22 +9,10 @@ public class SphereDetector : MonoBehaviour
 
     public Color GizmoColor { get; set; } = Color.blue;
 
-    private Collider[] _hitColliders;
-    private const int MAX_COLLIDER_COUNT = 10;
-
-    private void Awake()
+    public Collider[] DetectObject()
     {
-        _hitColliders = new Collider[MAX_COLLIDER_COUNT];
-    }
-
-    public Collider[] DetectObject(out int hitCount)
-    {
-        hitCount = Physics.OverlapSphereNonAlloc(GetDetectionPosition(), _detectionRadius, _hitColliders, _detectionLayer);
-
-        if (hitCount > 0) 
-            return _hitColliders;
-        else
-            return null;
+        Collider[] result = Physics.OverlapSphere(GetDetectionPosition(), _detectionRadius, _detectionLayer);
+        return result;
     }
 
     public Vector3 GetDetectionPosition()
