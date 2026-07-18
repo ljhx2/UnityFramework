@@ -9,24 +9,14 @@ public class NPCAgent : Agent
     {
         base.Awake();
         _waveInput = GetComponent<IAgentWaveInput>();
-    }
-
-    protected override State StateFactory(Type stateType)
-    {
-        State newState = null;
-        if (stateType == typeof(WaveState))
+        _stateFactory = new NPCAgentStateFactory(new NPCStateFactoryData()
         {
-            newState = new WaveState(_agentAnimations);
-            newState.AddTransition(new WaveMoveTransition());
-        }
-        else
-        {
-            newState = base.StateFactory(stateType);
-            if (stateType == typeof(MovementState))
-            {
-                newState.AddTransition(new MoveWaveTransition(_waveInput));
-            }
-        }
-        return newState;
+            AgentStats = _agentStats,
+            MovementInput = _input,
+            GroundDetector = _groundDetector,
+            AgentAnimations = _agentAnimations,
+            AgentMover = _mover,
+            WaveInput = _waveInput
+        });
     }
 }

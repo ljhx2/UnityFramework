@@ -29,6 +29,25 @@ public class PlayerAgent : Agent
         _toggleWeaponInput = GetComponent<IAgentToggleWeaponInput>();
         _hitDetector = GetComponent<HitDetector>();
         _health = GetComponent<Health>();
+
+        _stateFactory = new PlayerStateFactory(
+            new PlayerStateFactoryData
+            {
+                AgentStats = _agentStats,
+                MovementInput = _input,
+                GroundDetector = _groundDetector,
+                AgentAnimations = _agentAnimations,
+                AgentMover = _mover,
+                JumpInput = _jumpInput,
+                InteractInput = _interactInput,
+                InteractDetector = _interactionDetector,
+                ToggleWeapon = _toggleWeaponInput,
+                AttackInput = _attackInput,
+                WeaponHelper = _weaponHelper,
+                AgentGameObject = gameObject,
+                HitDetector = _hitDetector,
+                AgentHealth = _health
+            });
     }
 
     protected override void Update()
@@ -37,55 +56,4 @@ public class PlayerAgent : Agent
         _interactionDetector.DetectInteractable();
     }
 
-    protected override State StateFactory(Type stateType)
-    {
-        State newState = null;
-        if (stateType == typeof(JumpState))
-        {
-            newState = new JumpState(_mover, _agentAnimations, _input, _agentStats);
-            newState.AddTransition(new JumpFallTransition(_mover));
-        }
-        else if (stateType == typeof(InteractState))
-        {
-            newState = new InteractState(_agentAnimations, _interactionDetector);
-            newState.AddTransition(new InteractMoveTransition());
-        }
-        else if (stateType == typeof(DrawWeaponState))
-        {
-            newState = new DrawWeaponState(_weaponHelper, _mover, _agentAnimations, _input, _groundDetector, _agentStats);
-            newState.AddTransition(new DelayedTransition(0.2f, typeof(MovementState)));
-        }
-        else if (stateType == typeof(AttackState))
-        {
-            newState = new AttackState(_agentAnimations, _mover, _agentStats, gameObject, _hitDetector, 0.03f);
-            newState.AddTransition(new DelayedTransition(0.35f, typeof(MovementState)));
-        }
-        else if (stateType == typeof(GetHitState))
-        {
-            newState = new GetHitState(_agentAnimations, _mover, _agentStats);
-            newState.AddTransition(new DelayedTransition(0.32f, typeof(MovementState)));
-        }
-        else
-        {
-            newState = base.StateFactory(stateType);
-            if (stateType == typeof(MovementState))
-            {
-                newState.AddTransition(new JumpTransition(_jumpInput));
-                if (_weaponHelper.HasWeapon == false || _weaponHelper.IsWeaponHolstered)
-                {
-                    newState.AddTransition(new MoveInteractTransition(_interactInput, _interactionDetector));
-                }
-                if (_weaponHelper.HasWeapon && _weaponHelper.IsWeaponHolstered == false)
-                {
-                    newState.AddTransition(new MoveAttackTransition(_attackInput));
-                }
-                if (_weaponHelper.HasWeapon)
-                {
-                    newState.AddTransition(new MoveDrawWeaponTransition(_toggleWeaponInput));
-                }
-                newState.AddTransition(new GetHitTransition(_health));
-            }
-        }
-        return newState;
-    }
 }

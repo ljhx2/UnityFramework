@@ -15,6 +15,8 @@ public abstract class Agent : MonoBehaviour
     protected State _currentState;
 
     protected AgentStats _agentStats;
+
+    protected StateFactory _stateFactory;
     
 
     protected virtual void Awake()
@@ -25,6 +27,16 @@ public abstract class Agent : MonoBehaviour
         _agentAnimations = GetComponent<AgentAnimations>();
         _mover = GetComponent<IAgentMover>();
         _agentStats = GetComponent<AgentStats>();
+
+        _stateFactory = new StateFactory(
+            new StateFactoryData
+            {
+                AgentStats = _agentStats,
+                MovementInput = _input,
+                GroundDetector = _groundDetector,
+                AgentAnimations = _agentAnimations,
+                AgentMover = _mover
+            });
     }
 
     protected virtual void Start()
@@ -44,41 +56,16 @@ public abstract class Agent : MonoBehaviour
         _agentAnimations.SetBool(AnimationBoolType.Grounded, _groundDetector.Grounded);
     }
 
-    protected virtual State StateFactory(Type stateType)
-    {
-        State newState = null;
-        if (stateType == typeof(MovementState))
-        {
-            newState = new MovementState(_mover, _groundDetector, _agentAnimations, _input, _agentStats);
-            newState.AddTransition(new GroundedFallTransition(_groundDetector));
-        }
-        else if (stateType == typeof(FallState))
-        {
-            newState = new FallState(_mover, _agentAnimations, _input, _agentStats);
-            newState.AddTransition(new FallLandTransition(_groundDetector));
-        }
-        else if (stateType == typeof(LandState))
-        {
-            newState = new LandState(_agentAnimations, _agentStats);
-            newState.AddTransition(new LandMovementTransition());
-        }
-        else
-        {
-            throw new Exception($"Type not handled {stateType}");
-        }
-        return newState;
-    }
-
     private void TransitionToState(Type stateType)
     {
-        State newState = StateFactory(stateType);
+        State newState = _stateFactory.CreateState(stateType);
         if (_currentState != null)
         {
             _currentState.Exit();
             _currentState.OnTransition -= TransitionToState;
         }
         _currentState = newState;
-        Debug.Log($"Entering {stateType}");
+        //Debug.Log($"Entering {stateType}");
         _currentState.OnTransition += TransitionToState;
         _currentState.Enter();
     }

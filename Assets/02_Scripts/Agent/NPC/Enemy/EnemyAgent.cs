@@ -15,29 +15,20 @@ public class EnemyAgent : Agent
         _attackInput = GetComponent<IAgentAttackInput>();
         _hitDetector = GetComponent<HitDetector>();
         _health = GetComponent<Health>();
+
+        _stateFactory = new EnemyNPCStateFactory(
+            new EnemyNPCStateFactoryData
+            {
+                AgentStats = _agentStats,
+                MovementInput = _input,
+                GroundDetector = _groundDetector,
+                AgentAnimations = _agentAnimations,
+                AgentMover = _mover,
+                AttackInput = _attackInput,
+                HitDetector = _hitDetector,
+                AgentGameObject = gameObject,
+                HealthComponent = _health
+            });
     }
 
-    protected override State StateFactory(Type stateType)
-    {
-        State newState = null;
-        if (stateType == typeof(AttackState))
-        {
-            newState = new AttackState(_agentAnimations, _mover, _agentStats, gameObject, _hitDetector, 0.2f);
-            newState.AddTransition(new DelayedTransition(2f, typeof(MovementState)));
-        }
-        else if (stateType == typeof(NavMeshNPCDeathState))
-        {
-            newState = new NavMeshNPCDeathState(gameObject);
-        }
-        else
-        {
-            newState = base.StateFactory(stateType);
-            if (stateType == typeof(MovementState))
-            {
-                newState.AddTransition(new MoveAttackTransition(_attackInput));
-            }
-        }
-        newState.AddTransition(new NPCDeathTransition(_health));
-        return newState;
-    }
 }
