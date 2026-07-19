@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ResourceManager
 {
+    private PoolManager _poolManager;
+
+    public void Init(PoolManager poolManager)
+    {
+        _poolManager = poolManager;
+    }
+
     public T Load<T>(string path) where T : Object
     {
         if (typeof(T) == typeof(GameObject))
@@ -31,7 +38,7 @@ public class ResourceManager
         }
 
         if (original.GetComponent<Poolable>() != null)
-            return Managers.Pool.Pop(original, parent).gameObject;
+            return _poolManager.Pop(original, parent).gameObject;
 
         GameObject go = Object.Instantiate(original, parent);
         go.name = original.name;
@@ -46,7 +53,7 @@ public class ResourceManager
         Poolable poolable = go.GetComponent<Poolable>();
         if (poolable != null)
         {
-            Managers.Pool.Push(poolable);
+            _poolManager.Push(poolable);
             return;
         }
 

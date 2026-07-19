@@ -10,10 +10,14 @@ public class PoolManager
         public GameObject Original { get; private set; }
         public Transform Root { get; set; }
 
-        Stack<Poolable> _poolStack = new Stack<Poolable>();
+        private Stack<Poolable> _poolStack = new Stack<Poolable>();
 
-        public void Init(GameObject original, int count = 5)
+        private SceneManagerAddressable _sceneManager;
+
+        public void Init(SceneManagerAddressable sceneManager, GameObject original, int count = 5)
         {
+            _sceneManager = sceneManager;
+
             Original = original;
             Root = new GameObject().transform;
             Root.name = $"{original.name}_Root";
@@ -54,9 +58,9 @@ public class PoolManager
 
             poolable.gameObject.SetActive(true);
 
-            //DonDestroyOnLoad «ÿ¡¶ øÎµµ
+            //DonDestroyOnLoad Ìï¥Ï†ú Ïö©ÎèÑ
             if (parent == null)
-                poolable.transform.parent = Managers.Scene.CurrentScene.transform;
+                poolable.transform.parent = _sceneManager.CurrentScene.transform;
 
             poolable.transform.parent = parent;
             poolable.IsUsing = true;
@@ -66,11 +70,15 @@ public class PoolManager
     }
     #endregion
 
-    Dictionary<string, Pool> _pool = new Dictionary<string, Pool>();
-    Transform _root;
+    private Dictionary<string, Pool> _pool = new Dictionary<string, Pool>();
+    private Transform _root;
 
-    public void Init()
+    private SceneManagerAddressable _sceneManager;
+
+    public void Init(SceneManagerAddressable sceneManager)
     {
+        _sceneManager = sceneManager;
+
         if (_root == null)
         {
             _root = new GameObject { name = "@Pool_Root" }.transform;
@@ -81,7 +89,7 @@ public class PoolManager
     public void CreatePool(GameObject original, int count = 5)
     {
         Pool pool = new Pool();
-        pool.Init(original, count);
+        pool.Init(_sceneManager, original, count);
         pool.Root.parent = _root;
 
         _pool.Add(original.name, pool);

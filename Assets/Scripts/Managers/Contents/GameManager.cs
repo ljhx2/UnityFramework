@@ -21,7 +21,7 @@ public class GameManager
                 case Define.WorldObject.Player:
                     _player = go;
                     break;
-                case Define.WorldObject.Monster:
+                case Define.WorldObject.Enemy:
                     _monsters.Add(go);
                     break;
             }
@@ -50,7 +50,7 @@ public class GameManager
                         _player = null;
                 }
                 break;
-            case Define.WorldObject.Monster:
+            case Define.WorldObject.Enemy:
                 {
                     if (_monsters.Contains(go))
                         _monsters.Remove(go);

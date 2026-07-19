@@ -128,6 +128,7 @@ public class UIManager : MonoBehaviour
     //private Dictionary<string, UI_Popup> _popupDict = new Dictionary<string, UI_Popup>();
     private Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
 
+    private ResourceManagerAddressable _resourceManager;
 
     public GameObject Root
     {
@@ -169,13 +170,18 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void Init(ResourceManagerAddressable resourceManager)
+    {
+        _resourceManager = resourceManager;
+    }
+
     public void MakeSubItemAsync<T>(Transform parent = null, string key = null, Action<T> completed = null) where T : UI_Base
     {
         if (string.IsNullOrEmpty(key))
             key = typeof(T).Name;
 
         key = $"Prefabs/UI/SubItem/{key}";
-        Managers.ResourceA.InstantiateAsync(key, null, (go) =>
+        _resourceManager.InstantiateAsync(key, null, (go) =>
         {
             if (parent != null)
                 go.transform.SetParent(parent);
@@ -204,7 +210,7 @@ public class UIManager : MonoBehaviour
     }
     IEnumerator Co_ShowPanel<T>(string key, float fadeDuration = 0f, Action<T> completed = null) where T : UI_Panel
     {
-        var handle = Managers.ResourceA.InstantiateAsync(key, PanelRoot);
+        var handle = _resourceManager.InstantiateAsync(key, PanelRoot);
         yield return handle;
 
         GameObject instance = handle.Result;
@@ -242,7 +248,7 @@ public class UIManager : MonoBehaviour
     }
     IEnumerator Co_ShowPopup<T>(string key, float scaleDuration = 0f, Action<T> completed = null) where T : UI_Popup
     {
-        var handle = Managers.ResourceA.InstantiateAsync(key, PopupRoot);
+        var handle = _resourceManager.InstantiateAsync(key, PopupRoot);
         yield return handle;
 
         GameObject instance = handle.Result;
@@ -280,7 +286,7 @@ public class UIManager : MonoBehaviour
         UI_Popup popup = _popupStack.Pop();
         popup.Hide(scaleDuration, (popup) => 
         {
-            Managers.ResourceA.Destroy(popup.gameObject);
+            _resourceManager.Destroy(popup.gameObject);
             completed?.Invoke();
         });
     }
@@ -295,7 +301,7 @@ public class UIManager : MonoBehaviour
     {
         foreach (var kv in _panelDict)
         {
-            Managers.ResourceA.Destroy(kv.Value.gameObject);
+            _resourceManager.Destroy(kv.Value.gameObject);
         }
         _panelDict.Clear();
     }

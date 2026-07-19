@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class SoundManager
 {
-    AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
-    Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>(); //Caching
+    private AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
+    private Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>(); //Caching
 
-    public void Init()
+    private ResourceManagerAddressable _resourceManager;
+
+    public void Init(ResourceManagerAddressable resouceManager)
     {
+        _resourceManager = resouceManager;
+
         GameObject root = GameObject.Find("@Sound");
         if (root == null)
         {
@@ -74,7 +78,7 @@ public class SoundManager
     {
         if (type == Define.Sound.Bgm)
         {
-            Managers.ResourceA.LoadAsync<AudioClip>(key, (audioClip) =>
+            _resourceManager.LoadAsync<AudioClip>(key, (audioClip) =>
             {
                 completed?.Invoke(audioClip);
             });
@@ -84,7 +88,7 @@ public class SoundManager
             AudioClip audioClip = null;
             if (_audioClips.TryGetValue(key, out audioClip) == false)
             {
-                Managers.ResourceA.LoadAsync<AudioClip>(key, (clip) =>
+                _resourceManager.LoadAsync<AudioClip>(key, (clip) =>
                 {
                     _audioClips.Add(key, clip);
                     completed?.Invoke(clip);

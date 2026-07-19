@@ -14,7 +14,7 @@ public class MonsterController : BaseController
 
     public override void Init()
     {
-        WorldObjectType = Define.WorldObject.Monster;
+        WorldObjectType = Define.WorldObject.Enemy;
         _stat = gameObject.GetComponent<Stat>();
     }
 

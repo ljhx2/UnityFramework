@@ -23,7 +23,7 @@ public class GameScene : BaseScene
             Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
         });
         
-        Managers.Game.SpawnAsync(Define.WorldObject.Monster, "Monster");
+        Managers.Game.SpawnAsync(Define.WorldObject.Enemy, "Monster");
 
         yield break;
     }

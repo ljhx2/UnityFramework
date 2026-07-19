@@ -67,7 +67,7 @@ public abstract class BaseScene : MonoBehaviour
  
     public virtual IEnumerator Co_InitAsync()
     {
-        Object obj = GameObject.FindObjectOfType(typeof(EventSystem));
+        Object obj = Object.FindFirstObjectByType(typeof(EventSystem));
         if (obj == null)
         {
             Managers.ResourceA.InstantiateAsync("UI/EventSystem", null, (go) =>

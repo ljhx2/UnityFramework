@@ -12,8 +12,12 @@ public class DataManager
 {
     public Dictionary<int, Data.Stat> StatDict { get; private set; } = new Dictionary<int, Data.Stat>();
 
-    public void Init()
+    private ResourceManagerAddressable _resourceManager;
+
+    public void Init(ResourceManagerAddressable resourceManager)
     {
+        _resourceManager = resourceManager;
+
         LoadJson<Data.StatData, int, Data.Stat>("StatData", (loader) =>
         {
             StatDict = loader.MakeDict();
@@ -23,7 +27,7 @@ public class DataManager
     private void LoadJson<Loader, Key, Value>(string key, Action<Loader> completed = null) where Loader : ILoader<Key, Value>
     {
         key = $"Data/{key}";
-        Managers.ResourceA.LoadAsync<TextAsset>(key, (textAsset) =>
+        _resourceManager.LoadAsync<TextAsset>(key, (textAsset) =>
         {
             completed?.Invoke(JsonUtility.FromJson<Loader>(textAsset.text));
         });

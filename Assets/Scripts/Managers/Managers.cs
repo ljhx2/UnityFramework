@@ -60,9 +60,11 @@ public class Managers : MonoBehaviour
             s_instance = go.GetComponent<Managers>();
 
             //하위 매니저 초기화
-            s_instance._data.Init();
-            s_instance._pool.Init();
-            s_instance._sound.Init();
+            s_instance._data.Init(ResourceA);
+            s_instance._resource.Init(Pool);
+            s_instance._resourceA.Init(Pool);
+            s_instance._pool.Init(Scene);
+            s_instance._sound.Init(ResourceA);
 
             Transform sceneManagerTransform = s_instance.transform.Find("@SceneManagerAddressable");
             if (sceneManagerTransform == null)
@@ -79,6 +81,7 @@ public class Managers : MonoBehaviour
             }
             uiManagerTransform.parent = go.transform;
             s_instance._ui = uiManagerTransform.gameObject.GetOrAddComponent<UIManager>();
+            s_instance._ui.Init(ResourceA);
         }
     }
 

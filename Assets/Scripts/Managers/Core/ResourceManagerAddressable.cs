@@ -10,6 +10,13 @@ public class ResourceManagerAddressable
     private Dictionary<string, AsyncOperationHandle> _loadedResourceHandle = new Dictionary<string, AsyncOperationHandle>();
 
 
+    private PoolManager _poolManager;
+
+    public void Init(PoolManager poolManager)
+    {
+        _poolManager = poolManager;
+    }
+
     public AsyncOperationHandle<T> LoadAsync<T>(string key, Action<T> completed = null) where T : UnityEngine.Object
     {
         if (_loadedResourceHandle.ContainsKey(key))
@@ -62,7 +69,7 @@ public class ResourceManagerAddressable
         Poolable poolable = go.GetComponent<Poolable>();
         if (poolable != null)
         {
-            Managers.Pool.Push(poolable);
+            _poolManager.Push(poolable);
             return;
         }
 
