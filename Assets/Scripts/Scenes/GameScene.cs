@@ -16,14 +16,12 @@ public class GameScene : BaseScene
 
         Dictionary<int, Data.Stat> dick = Managers.Data.StatDict;
 
-        gameObject.GetOrAddComponent<CursorController>();
-
-        Managers.Game.SpawnAsync(Define.WorldObject.Player, "UnityChan", null, (player) =>
-        {
-            Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
-        });
-        
-        Managers.Game.SpawnAsync(Define.WorldObject.Enemy, "Monster");
+        //Managers.Game.SpawnAsync(Define.WorldObject.Player, "UnityChan", null, (player) =>
+        //{
+        //    
+        //});
+        //
+        //Managers.Game.SpawnAsync(Define.WorldObject.Enemy, "Monster");
 
         yield break;
     }
@@ -32,31 +30,4 @@ public class GameScene : BaseScene
     {
         Debug.Log("GameScene Clear!");
     }
-
-    bool _toggle = false;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Managers.UI.ShowPopupUIAsync<UI_Inven>(scaleDuration: 0.2f, completed: (panel) => { _inven = panel; });
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Managers.UI.ClosePopupUI(scaleDuration: 0.2f);
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            _toggle = !_toggle;
-            if (_toggle)
-            {
-                _inven.Hide(0.2f);
-            }
-            else
-            {
-                _inven.Show(0.2f);
-            }
-            
-        }
-    }
-
 }

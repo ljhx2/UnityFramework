@@ -16,21 +16,19 @@ public class Managers : MonoBehaviour
 
     #region Core
     DataManager _data = new DataManager();
-    InputManager _input = new InputManager();
+    //InputManager _input = new InputManager();
     PoolManager _pool = new PoolManager();
     ResourceManager _resource = new ResourceManager();
     ResourceManagerAddressable _resourceA = new ResourceManagerAddressable();
-    //SceneManagerEx _scene = new SceneManagerEx();
     SceneManagerAddressable _scene = null;
     SoundManager _sound = new SoundManager();
-    //UIManager _ui = new UIManager();
     UIManager _ui = null;
     public static DataManager Data { get { return Instance._data; } }
-    public static InputManager Input { get { return Instance._input; } }
+    //public static InputManager Input { get { return Instance._input; } }
     public static PoolManager Pool { get { return Instance._pool; } }
     public static ResourceManager Resource {  get { return Instance._resource; } }
     public static ResourceManagerAddressable ResourceA { get { return Instance._resourceA; } }
-    //public static SceneManagerEx Scene { get { return Instance._scene; } }
+    
     public static SceneManagerAddressable Scene { get { return Instance._scene; } }
     public static SoundManager Sound { get { return Instance._sound; } }
     public static UIManager UI { get { return Instance._ui; } }
@@ -43,7 +41,7 @@ public class Managers : MonoBehaviour
 
     void Update()
     {
-        _input.OnUpdate();
+        //_input.OnUpdate();
     }
 
     static void Init()
@@ -60,6 +58,7 @@ public class Managers : MonoBehaviour
             s_instance = go.GetComponent<Managers>();
 
             //하위 매니저 초기화
+            s_instance._game.Init(ResourceA);
             s_instance._data.Init(ResourceA);
             s_instance._resource.Init(Pool);
             s_instance._resourceA.Init(Pool);
@@ -87,7 +86,7 @@ public class Managers : MonoBehaviour
 
     public static void Clear()
     {
-        Input.Clear();
+        //Input.Clear();
         Scene.Clear();
         Sound.Clear();
         UI.Clear();

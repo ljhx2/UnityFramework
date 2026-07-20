@@ -15,7 +15,7 @@ public abstract class BaseScene : MonoBehaviour
     public Define.Scene SceneType { get; protected set; } = Define.Scene.Unknown;
 
 #if UNITY_EDITOR
-    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void FirstLoad()
     {
         Application.targetFrameRate = 60;
@@ -67,17 +67,7 @@ public abstract class BaseScene : MonoBehaviour
  
     public virtual IEnumerator Co_InitAsync()
     {
-        Object obj = Object.FindFirstObjectByType(typeof(EventSystem));
-        if (obj == null)
-        {
-            Managers.ResourceA.InstantiateAsync("UI/EventSystem", null, (go) =>
-            {
-                go.name = "@EventSystem";
-            });
-        }
-
         
-
         yield break;
     }
 

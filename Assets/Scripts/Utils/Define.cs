@@ -1,28 +1,6 @@
 
 public class Define
 {
-    public enum WorldObject
-    {
-        Unknown,
-        Player,
-        Enemy,
-    }
-
-    public enum State
-    {
-        Die,
-        Moving,
-        Idle,
-        Skill,
-    }
-
-    public enum Layer
-    {
-        Monster = 8,
-        Ground = 9,
-        Block = 10,
-    }
-
     public enum Scene
     {
         Unknown,
@@ -53,8 +31,5 @@ public class Define
         PointerUp,
         Click,
     }
-    public enum CameraMode
-    {
-        QuarterView,
-    }
+    
 }

@@ -1,9 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Legacy
+
+/*
 public class InputManager
 {
     public Action KeyAction = null;
@@ -52,3 +53,4 @@ public class InputManager
         MouseAction = null;
     }
 }
+*/
